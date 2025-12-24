@@ -1,34 +1,55 @@
-import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { useForm, useWatch } from "react-hook-form";
+import { Link, useNavigate } from "react-router";
 import { authFormStyle } from "../../utils/classNames";
+import { useAuthStore } from "../../stores/useAuthStore";
+import toast from "react-hot-toast";
+import { axiosInstance } from "../../utils/axiosInstance";
+import AuthTitleComponent from "../../components/auth/AuthTitle";
+import AuthSpinnerLoader from "../../components/loaders/AuthSpinner";
 
 export default function RegisterPage() {
+  const { register: userRegister, isSigningIn } = useAuthStore();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     mode: "all",
   });
 
-  const handleLogin = (data) => {
-    console.log(data);
+  const watchPassword = useWatch({ name: "password", control });
+
+  const handleLogin = async (data) => {
+    const { user, error } = await userRegister(
+      data.fullName,
+      data.email,
+      data.password
+    );
+    await axiosInstance.post("/users", {
+      name: data.fullName,
+      email: data.email,
+      role: data.role,
+    });
+    if (!user) {
+      toast.error(error);
+      return;
+    } else {
+      toast.success("User registration successful!");
+      user && navigate("/");
+    }
   };
   return (
     <form className={authFormStyle} onSubmit={handleSubmit(handleLogin)}>
-      <p className="text-xl text-center font-bold">Create An Account</p>
-      <small className="text-xs text-center mb-6">
-        Already a member?{" "}
-        <Link
-          to={"/auth/login"}
-          className="link link-hover font-bold link-primary"
-        >
-          Login
-        </Link>
-      </small>
+      <AuthTitleComponent
+        title={"Create An Account"}
+        subtitle={"Already a user?"}
+        link={{ path: "/auth/login", name: "Login" }}
+      />
       <label className="label">Full Name</label>
       <input
-        type="email"
+        type="text"
         className="input w-full"
         placeholder="John Doe"
         {...register("fullName", {
@@ -38,7 +59,7 @@ export default function RegisterPage() {
       {errors.fullName && (
         <p className="text-error">{errors.fullName.message}</p>
       )}
-      <label className="label">Email</label>
+      <label className="label mt-2">Email</label>
       <input
         type="email"
         className="input w-full"
@@ -67,12 +88,22 @@ export default function RegisterPage() {
         placeholder="******"
         {...register("cPassword", {
           required: "Password is required",
+          validate: (value) =>
+            value === watchPassword || "Password not matched!",
         })}
       />
       {errors.cPassword && (
         <p className="text-error">{errors.cPassword.message}</p>
       )}
-      <button className="btn btn-primary mt-3">Login Now</button>
+      <label className="label mt-2">Select Role</label>
+      <select className="select w-full" {...register("role")}>
+        <option value="user">User</option>
+        <option value="agent">Delivery Agent</option>
+      </select>
+      <button disabled={isSigningIn} className="btn btn-primary mt-3">
+        {isSigningIn && <AuthSpinnerLoader />}
+        Register{isSigningIn && "ing"}
+      </button>
     </form>
   );
 }

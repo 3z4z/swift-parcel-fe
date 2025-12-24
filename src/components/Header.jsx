@@ -4,7 +4,7 @@ import NavbarComponent from "./Navbar";
 
 export default function HeaderComponent() {
   return (
-    <header className="p-3 bg-white flex justify-between items-center shadow">
+    <header className="w-full p-3 flex justify-between items-center">
       <Link to={"/"}>
         <LogoComponent />
       </Link>
