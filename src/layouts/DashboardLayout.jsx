@@ -11,7 +11,6 @@ import { useAuthStore } from "../stores/useAuthStore";
 export default function DashboardLayout() {
   const { user } = useAuthStore();
   const { pathname } = useLocation();
-  console.log("pathname", pathname.includes("auth"));
   return (
     <div className="flex flex-col min-h-dvh w-full">
       <div className="drawer lg:drawer-open min-h-dvh">

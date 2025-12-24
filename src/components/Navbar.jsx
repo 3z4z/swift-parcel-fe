@@ -12,13 +12,10 @@ export default function NavbarComponent() {
       {isAuthLoading ? (
         <PrimarySpinnerLoader />
       ) : user ? (
-        <div className="flex gap-5 items-center">
-          <p>
-            Welcome,{" "}
-            <span className="font-semibold">
-              {user?.displayName.split(" ")[0]}
-            </span>
-          </p>
+        <div className="flex gap-2 items-center">
+          <Link to={"/add-parcel"} className="btn btn-primary">
+            Send Parcel
+          </Link>
           <button className="btn btn-error" onClick={handleLogout}>
             Log out
           </button>

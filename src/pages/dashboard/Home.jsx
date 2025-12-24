@@ -9,7 +9,6 @@ export default function DashboardHomePage() {
   if (isRoleLoading) {
     return <PageLoader />;
   }
-  console.log("userRole", role);
   switch (role) {
     case "admin":
       return <AdminDbHome />;

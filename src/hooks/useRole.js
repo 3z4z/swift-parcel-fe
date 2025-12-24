@@ -4,7 +4,6 @@ import useAxios from "./useAxios.js";
 
 export default function useRole() {
   const { user } = useAuthStore();
-  console.log("user", user.email);
   const axios = useAxios();
   const { isLoading: isRoleLoading, data: role = "user" } = useQuery({
     queryKey: ["user-role", user?.email],
