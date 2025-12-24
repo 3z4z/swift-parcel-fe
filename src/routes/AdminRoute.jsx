@@ -6,7 +6,7 @@ import { useAuthStore } from "../stores/useAuthStore";
 export default function AdminRoute({ children }) {
   const { role, isRoleLoading } = useRole();
   const { isSigningIn } = useAuthStore();
-  if (isRoleLoading || isSigningIn) return <PageLoader />;
+  if (isRoleLoading && isSigningIn) return <PageLoader />;
   if (role === "admin") {
     return children;
   } else {

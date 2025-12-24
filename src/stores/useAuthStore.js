@@ -7,13 +7,25 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase.config";
+import { axiosInstance } from "../utils/axiosInstance";
 
-export const useAuthStore = create((set) => ({
+export const useAuthStore = create((set, get) => ({
   user: null,
   isSigningIn: false,
   isAuthLoading: true,
   isUserReady: false,
   error: "",
+
+  sendTokenToBackend: async (user) => {
+    if (!user) return;
+    const idToken = await user.getIdToken();
+    await axiosInstance.post(
+      "/users/login",
+      { idToken },
+      { withCredentials: true }
+    );
+    set({ isCookieReady: true });
+  },
 
   register: async (name, email, password) => {
     set({ isSigningIn: true });
@@ -27,6 +39,7 @@ export const useAuthStore = create((set) => ({
       await updateProfile(user, {
         displayName: name,
       });
+      await get().sendTokenToBackend(user);
       set({ user });
       return { user };
     } catch (err) {
@@ -40,9 +53,10 @@ export const useAuthStore = create((set) => ({
     set({ isSigningIn: true });
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
-      const firebaseUser = result.user;
-      set({ user: firebaseUser, isUserReady: true });
-      return { user: firebaseUser };
+      const user = result.user;
+      await get().sendTokenToBackend(user);
+      set({ user, isUserReady: true });
+      return { user };
     } catch (err) {
       set({ error: err.message });
       return { error: err.message };
@@ -52,6 +66,7 @@ export const useAuthStore = create((set) => ({
   },
   logout: async () => {
     await signOut(auth);
+    await axiosInstance.post("/users/logout", {}, { withCredentials: true });
     set({
       user: null,
       isUserReady: false,

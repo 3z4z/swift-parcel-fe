@@ -69,6 +69,10 @@ select.select {
   @apply rounded-full;
 }
 
+textarea.textarea {
+  @apply rounded-2xl resize-none;
+}
+
 button.btn,
 a.btn {
   @apply px-6;
@@ -76,6 +80,12 @@ a.btn {
 
 label.label {
   @apply text-sm;
+}
+
+.cost-form input,
+.cost-form select,
+.cost-form button[type="button"] {
+  @apply bg-base-300;
 }
 
 @layer base {

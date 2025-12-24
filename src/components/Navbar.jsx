@@ -1,9 +1,11 @@
 import { Link } from "react-router";
 import { useAuthStore } from "../stores/useAuthStore";
 import PrimarySpinnerLoader from "./loaders/PrimarySpinner";
+import useRole from "../hooks/useRole";
 
 export default function NavbarComponent() {
   const { user, isAuthLoading, logout } = useAuthStore();
+  const { role } = useRole();
   const handleLogout = async () => {
     await logout();
   };
@@ -13,10 +15,12 @@ export default function NavbarComponent() {
         <PrimarySpinnerLoader />
       ) : user ? (
         <div className="flex gap-2 items-center">
-          <Link to={"/add-parcel"} className="btn btn-primary">
-            Send Parcel
-          </Link>
-          <button className="btn btn-error" onClick={handleLogout}>
+          {role === "user" && (
+            <Link to={"/add-parcel"} className="btn btn-primary">
+              Send Parcel
+            </Link>
+          )}
+          <button className="btn btn-secondary" onClick={handleLogout}>
             Log out
           </button>
         </div>

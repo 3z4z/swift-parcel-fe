@@ -48,17 +48,21 @@ export const router = createBrowserRouter([
       {
         path: "manage-users",
         element: (
-          <AdminRoute>
-            <ManageUsersPage />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageUsersPage />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "all-orders",
         element: (
-          <AdminRoute>
-            <AllOrdersPage />
-          </AdminRoute>
+          <PrivateRoute>
+            <AdminRoute>
+              <AllOrdersPage />
+            </AdminRoute>
+          </PrivateRoute>
         ),
       },
 
@@ -66,17 +70,21 @@ export const router = createBrowserRouter([
       {
         path: "add-parcel",
         element: (
-          <UserRoute>
-            <AddParcelPage />
-          </UserRoute>
+          <PrivateRoute>
+            <UserRoute>
+              <AddParcelPage />
+            </UserRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "my-orders",
         element: (
-          <UserRoute>
-            <MyOrdersPage />
-          </UserRoute>
+          <PrivateRoute>
+            <UserRoute>
+              <MyOrdersPage />
+            </UserRoute>
+          </PrivateRoute>
         ),
       },
     ],

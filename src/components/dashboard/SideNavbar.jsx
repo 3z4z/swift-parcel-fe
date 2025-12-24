@@ -5,7 +5,7 @@ import useRole from "../../hooks/useRole";
 export default function DbSideNavbarComponent() {
   const { role } = useRole();
   return (
-    <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
+    <div className="flex min-h-full flex-col items-start bg-base-300 is-drawer-close:w-14 is-drawer-open:w-64">
       <ul className="menu w-full grow">
         <li>
           <Link
