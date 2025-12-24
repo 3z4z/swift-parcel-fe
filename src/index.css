@@ -1,0 +1,96 @@
+/* font import */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+/* plugins */
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light;
+}
+
+/* custom light theme */
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: oklch(98% 0.008 235);
+  --color-base-200: oklch(95% 0.012 235);
+  --color-base-300: oklch(92% 0.018 235);
+  --color-base-content: oklch(20% 0.04 240);
+
+  --color-primary: oklch(40% 0.09 260);
+  --color-primary-content: oklch(95% 0.015 260);
+
+  --color-secondary: oklch(70% 0.09 230);
+  --color-secondary-content: oklch(15% 0.02 230);
+
+  --color-accent: oklch(55% 0.15 200);
+  --color-accent-content: oklch(95% 0.02 210);
+
+  --color-neutral: oklch(35% 0.03 240);
+  --color-neutral-content: oklch(95% 0.015 240);
+
+  --color-info: oklch(70% 0.12 240);
+  --color-info-content: oklch(20% 0.02 240);
+
+  --color-success: oklch(68% 0.18 150);
+  --color-success-content: oklch(20% 0.03 150);
+
+  --color-warning: oklch(75% 0.22 90);
+  --color-warning-content: oklch(22% 0.03 90);
+
+  --color-error: oklch(60% 0.25 25);
+  --color-error-content: oklch(98% 0.01 25);
+
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+
+  --depth: 1;
+  --noise: 0;
+}
+
+/* global styles */
+* {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold;
+}
+
+button.btn,
+a.btn,
+input.input,
+select.select {
+  @apply rounded-full;
+}
+
+button.btn,
+a.btn {
+  @apply px-6;
+}
+
+label.label {
+  @apply text-sm;
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
