@@ -30,12 +30,12 @@ export default function ManageUsersPage() {
       <DbPageTitle title={"Manage all users"} />
       <div className="overflow-x-auto rounded-box border border-base-content/5 bg-white shadow">
         <table className="table">
-          {/* head */}
           <thead className="bg-base-200">
             <tr>
               <th>Sl No.</th>
               <th>Name</th>
               <th>Role</th>
+              <th>Preferred City</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -65,6 +65,9 @@ export default function ManageUsersPage() {
                     >
                       {u.role}
                     </span>
+                  </td>
+                  <td>
+                    <p className="text-neutral">{u.preferredCity}</p>
                   </td>
                   <td>
                     <span

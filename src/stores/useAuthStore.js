@@ -14,6 +14,7 @@ export const useAuthStore = create((set, get) => ({
   isSigningIn: false,
   isAuthLoading: true,
   isUserReady: false,
+  isCookieReady: false,
   error: "",
 
   sendTokenToBackend: async (user) => {
@@ -72,6 +73,7 @@ export const useAuthStore = create((set, get) => ({
       isUserReady: false,
       isAuthLoading: false,
       isSigningIn: false,
+      isCookieReady: false,
     });
   },
   initAuthListener: () => {
@@ -81,6 +83,7 @@ export const useAuthStore = create((set, get) => ({
           user: null,
           isAuthLoading: false,
           isUserReady: false,
+          isCookieReady: false,
         });
         return;
       }
@@ -88,6 +91,7 @@ export const useAuthStore = create((set, get) => ({
         user: currentUser,
         isAuthLoading: false,
         isUserReady: true,
+        isCookieReady: true,
       });
     });
     return unsubscribe;

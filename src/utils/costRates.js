@@ -31,15 +31,15 @@ export const BASE_RATES = {
 
 export const PAYMENT_FEES = {
   hub: {
-    cod: 20,
+    cod: 30,
     prepaid: 20,
   },
   normal: {
-    cod: 50,
+    cod: 60,
     prepaid: 35,
   },
   urgent: {
-    cod: 70,
+    cod: 80,
     prepaid: 50,
   },
 };

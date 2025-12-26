@@ -88,6 +88,14 @@ label.label {
   @apply bg-base-300;
 }
 
+.timeline hr {
+  @apply bg-neutral/15;
+}
+
+.leaflet-control-attribution {
+  @apply hidden;
+}
+
 @layer base {
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {

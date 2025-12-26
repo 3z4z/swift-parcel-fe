@@ -14,12 +14,12 @@ export default function DashboardLayout() {
   return (
     <div className="flex flex-col min-h-dvh w-full">
       <div className="drawer lg:drawer-open min-h-dvh">
-        <input id="db-sidebar" type="checkbox" className="drawer-toggle" />
+        <input id="dashboard" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           <nav className="navbar w-full bg-base-300 border-b-2 border-b-primary/10 shadow-lg">
             {user && (
               <label
-                htmlFor="db-sidebar"
+                htmlFor="dashboard"
                 aria-label="open sidebar"
                 className="btn btn-square btn-ghost"
               >
@@ -37,11 +37,6 @@ export default function DashboardLayout() {
         <div className="drawer-side is-drawer-close:overflow-visible">
           {user && (
             <>
-              <label
-                htmlFor="my-drawer-4"
-                aria-label="close sidebar"
-                className="drawer-overlay"
-              ></label>
               <DbSideNavbarComponent />
             </>
           )}

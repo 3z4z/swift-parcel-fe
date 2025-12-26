@@ -16,7 +16,7 @@ export default function CostCalculatorForm() {
     const { pType, dType, dLocation, payType, pWeight } = data;
     const baseRate = BASE_RATES[pType][dType][dLocation];
     const paymentFee = PAYMENT_FEES[dType][payType];
-    const weightCharge = pWeight >= 3 ? EXTRA_WEIGHT_COST * pWeight : 0;
+    const weightCharge = pWeight >= 3 ? EXTRA_WEIGHT_COST * (pWeight - 3) : 0;
     const finalCost = baseRate + paymentFee + weightCharge;
     setTotal(finalCost);
   };
