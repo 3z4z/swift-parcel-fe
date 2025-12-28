@@ -3,10 +3,13 @@ import { useAuthStore } from "../stores/useAuthStore";
 import PrimarySpinnerLoader from "./loaders/PrimarySpinner";
 import useRole from "../hooks/useRole";
 import { LuScanLine } from "react-icons/lu";
+import { useRef } from "react";
+import { ScanParcelComponent } from "./ScanParcel";
 
 export default function NavbarComponent() {
   const { user, isAuthLoading, logout } = useAuthStore();
   const { role } = useRole();
+  const scanParcelModalRef = useRef();
   const handleLogout = async () => {
     await logout();
   };
@@ -25,10 +28,16 @@ export default function NavbarComponent() {
             Log out
           </button>
           {role === "agent" && (
-            <button className="btn shadow text-primary">
-              <LuScanLine className="size-5" />
-              <span>Scan</span>
-            </button>
+            <>
+              <button
+                className="btn shadow text-primary"
+                onClick={() => scanParcelModalRef.current.showModal()}
+              >
+                <LuScanLine className="size-5" />
+                <span>Scan</span>
+              </button>
+              <ScanParcelComponent />
+            </>
           )}
         </div>
       ) : (
