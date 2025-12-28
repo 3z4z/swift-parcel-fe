@@ -4,55 +4,25 @@ import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
   const [result, setResult] = useState("");
   const videoRef = useRef();
-  const codeReaderRef = useRef(null);
-
-  // Function to start scanning
-  const startScanner = () => {
-    if (!videoRef.current) return;
-    codeReaderRef.current = new BrowserMultiFormatReader();
-    codeReaderRef.current.decodeFromVideoDevice(
-      null,
-      videoRef.current,
-      (res, err) => {
-        if (res) {
-          const text = res.getText();
-          setResult(text);
-          if (onScan) onScan(text);
-        }
-        if (err && !(err instanceof NotFoundException)) {
-          console.error(err);
-        }
-      }
-    );
-  };
-
-  // Stop scanning
-  const stopScanner = () => {
-    if (codeReaderRef.current) {
-      codeReaderRef.current.reset();
-      codeReaderRef.current = null;
-    }
-  };
 
   useEffect(() => {
-    if (!scanParcelModalRef.current) return;
+    if (!videoRef.current) return;
 
-    const modal = scanParcelModalRef.current;
+    const codeReader = new BrowserMultiFormatReader();
 
-    const handleOpen = () => startScanner();
-    const handleClose = () => stopScanner();
+    codeReader.decodeFromVideoDevice(null, videoRef.current, (res, err) => {
+      if (res) {
+        const text = res.getText();
+        setResult(text);
+        if (onScan) onScan(text);
+      }
+      if (err && !(err instanceof NotFoundException)) {
+        console.error(err);
+      }
+    });
 
-    modal.addEventListener("close", handleClose);
-    modal.addEventListener("cancel", handleClose);
-    modal.addEventListener("show", handleOpen);
-
-    return () => {
-      modal.removeEventListener("close", handleClose);
-      modal.removeEventListener("cancel", handleClose);
-      modal.removeEventListener("show", handleOpen);
-      stopScanner();
-    };
-  }, [scanParcelModalRef]);
+    return () => codeReader.reset();
+  }, [onScan]);
 
   return (
     <dialog ref={scanParcelModalRef} className="modal">
