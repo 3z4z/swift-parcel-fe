@@ -1,20 +1,35 @@
-import { useState } from "react";
-import { useZxing } from "react-zxing";
+import { useState, useRef, useEffect } from "react";
+import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 
-export const ScanParcelComponent = (scanParcelModalRef) => {
+export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
   const [result, setResult] = useState("");
-  const { ref } = useZxing({
-    onDecodeResult(result) {
-      setResult(result.getText());
-    },
-  });
+  const videoRef = useRef();
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    const codeReader = new BrowserMultiFormatReader();
+
+    codeReader.decodeFromVideoDevice(null, videoRef.current, (res, err) => {
+      if (res) {
+        const text = res.getText();
+        setResult(text);
+        if (onScan) onScan(text);
+      }
+      if (err && !(err instanceof NotFoundException)) {
+        console.error(err);
+      }
+    });
+
+    return () => codeReader.reset();
+  }, [onScan]);
 
   return (
     <dialog ref={scanParcelModalRef} className="modal">
       <div className="modal-box">
-        <video ref={ref} />
+        <video ref={videoRef} style={{ width: "100%" }} />
         <p>
-          <span>Last result:</span>
+          <span>Last result: </span>
           <span>{result}</span>
         </p>
         <div className="modal-action">

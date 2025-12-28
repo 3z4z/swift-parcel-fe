@@ -10,6 +10,10 @@ export default function NavbarComponent() {
   const { user, isAuthLoading, logout } = useAuthStore();
   const { role } = useRole();
   const scanParcelModalRef = useRef();
+  const handleScan = (trackingId) => {
+    console.log("Scanned Parcel ID:", trackingId);
+    scanParcelModalRef.current.close();
+  };
   const handleLogout = async () => {
     await logout();
   };
@@ -36,7 +40,10 @@ export default function NavbarComponent() {
                 <LuScanLine className="size-5" />
                 <span>Scan</span>
               </button>
-              <ScanParcelComponent scanParcelModalRef={scanParcelModalRef} />
+              <ScanParcelComponent
+                onScan={handleScan}
+                scanParcelModalRef={scanParcelModalRef}
+              />
             </>
           )}
         </div>
