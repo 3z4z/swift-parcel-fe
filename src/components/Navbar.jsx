@@ -36,7 +36,7 @@ export default function NavbarComponent() {
                 <LuScanLine className="size-5" />
                 <span>Scan</span>
               </button>
-              <ScanParcelComponent />
+              <ScanParcelComponent scanParcelModalRef={scanParcelModalRef} />
             </>
           )}
         </div>

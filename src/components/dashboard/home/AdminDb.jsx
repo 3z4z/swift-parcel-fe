@@ -1,5 +1,4 @@
 import { useAuthStore } from "../../../stores/useAuthStore";
-import { BarcodeScanner } from "../../ScanParcel";
 
 export default function AdminDbHome() {
   const { user } = useAuthStore();
