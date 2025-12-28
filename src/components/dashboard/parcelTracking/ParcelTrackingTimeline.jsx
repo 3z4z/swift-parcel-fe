@@ -90,9 +90,19 @@ export default function ParcelTrackingTimeline({ parcel }) {
           logs.map((log) => (
             <div
               key={log._id}
-              className="first:border-s-success border-s-neutral/50 border-s-3 mb-3 last:mb-0 my-4 px-3 rounded-e-2xl min-w-84 w-max group"
+              className={`${
+                log.deliveryStatus !== "cancelled"
+                  ? "first:border-s-success"
+                  : "first:border-s-error"
+              } border-s-neutral/50 border-s-3 mb-3 last:mb-0 my-4 px-3 rounded-e-2xl min-w-84 w-max group`}
             >
-              <p className="group-first:text-accent text-neutral/90 font-medium text-[0.9375rem]">
+              <p
+                className={`${
+                  log.deliveryStatus !== "cancelled"
+                    ? "group-first:text-accent"
+                    : "group-first:text-error"
+                } text-neutral/90 font-medium text-[0.9375rem]`}
+              >
                 {log.details}
               </p>
               <small className="group-first:text-neutral/80 text-neutral/50">

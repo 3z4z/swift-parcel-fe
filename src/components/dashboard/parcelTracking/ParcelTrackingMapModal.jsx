@@ -23,7 +23,27 @@ export default function ParcelTrackingMapModal({ logs, mapModalRef }) {
     coords: [l?.location?.lat, l?.location?.lng],
     details: l?.details,
   }));
+
   if (!locations || locations.length === 0) return null;
+
+  // Group logs by same coordinate
+  const grouped = logs.reduce((acc, log) => {
+    const coords = [log.location.lat, log.location.lng];
+    const key = `${coords[0]},${coords[1]}`;
+
+    if (!acc[key]) {
+      acc[key] = { coords, logs: [] };
+    }
+
+    acc[key].logs.push({
+      details: log.details,
+      createdAt: log.createdAt,
+    });
+
+    return acc;
+  }, {});
+  console.log("grouped", grouped);
+
   return (
     <dialog ref={mapModalRef} className="modal">
       <div className="modal-box max-w-2xl">
@@ -36,20 +56,33 @@ export default function ParcelTrackingMapModal({ logs, mapModalRef }) {
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              attribution="&copy; OpenStreetMap contributors"
             />
+
             <Polyline
               positions={locations.map((l) => l.coords)}
               color="#4A89F3"
               weight={4}
             />
-            {locations.map((l, i) => (
-              <Marker key={i} position={l?.coords}>
-                <Popup>{l?.details}</Popup>
+            {Object.values(grouped).map((loc, i) => (
+              <Marker key={i} position={loc.coords}>
+                <Popup>
+                  <ul>
+                    {loc.logs.map((logItem, idx) => (
+                      <li key={idx} className="border-b border-neutral/10">
+                        <p className="font-medium mt-2!">{logItem.details}</p>
+                        <p className="opacity-60 my-2! text-xs!">
+                          {new Date(logItem.createdAt).toLocaleString()}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </Popup>
               </Marker>
             ))}
           </MapContainer>
         </div>
+
         <div className="modal-action">
           <button
             className="btn btn-primary btn-soft border-primary/25"

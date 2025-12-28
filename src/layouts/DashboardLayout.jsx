@@ -1,10 +1,6 @@
 import { Outlet, useLocation } from "react-router";
 import HeaderComponent from "../components/Header";
-import {
-  RiDashboardHorizontalLine,
-  RiFileListLine,
-  RiMenuFill,
-} from "react-icons/ri";
+import { RiMenuFill } from "react-icons/ri";
 import DbSideNavbarComponent from "../components/dashboard/SideNavbar";
 import { useAuthStore } from "../stores/useAuthStore";
 

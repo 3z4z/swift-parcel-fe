@@ -2,7 +2,7 @@ export default function useParcelProgress(currentStatus) {
   const stages = {
     accepted: ["accepted", "assigned"],
     picked: ["picked"],
-    transit: ["to-central", "at-central", "to-delivery-hub", "at-delivery-hub"],
+    transit: ["to-central", "in-central", "to-delivery-hub", "at-delivery-hub"],
     delivery: ["assigned-to-deliver", "going-to-receiver"],
     delivered: ["delivered"],
   };

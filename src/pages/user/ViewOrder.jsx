@@ -4,6 +4,7 @@ import PageLoader from "../../components/loaders/PageLoader/PageLoader";
 import useAxios from "../../hooks/useAxios";
 import { IoCall } from "react-icons/io5";
 import ParcelTrackingTimeline from "../../components/dashboard/parcelTracking/ParcelTrackingTimeline";
+import ParcelQRCode from "../../components/ParcelQrCode";
 
 export default function ViewOrderPage() {
   const { id } = useParams();
@@ -83,9 +84,37 @@ export default function ViewOrderPage() {
                 </div>
               )}
             </div>
+            <div className="mt-5">
+              <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary/25 w-max pe-3 mb-4">
+                Payment Info
+              </h3>
+              <div className="flex items-center gap-2">
+                <p className="font-semibold text-primary">
+                  ৳{parcel.parcelCost} BDT
+                </p>
+              </div>
+              <div className="capitalize mt-3 flex gap-2 items-center">
+                {parcel.paymentStatus === "cod" ? (
+                  <p className="badge badge-primary badge-soft">
+                    cash on delivery
+                  </p>
+                ) : parcel.paymentStatus === "unpaid" ? (
+                  <>
+                    <p className="badge badge-warning badge-soft">
+                      {parcel.paymentStatus}
+                    </p>
+                    <button className="btn btn-primary btn-sm">Pay Now</button>
+                  </>
+                ) : (
+                  <p className="badge badge-success badge-soft">
+                    {parcel.paymentStatus}
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
           <div>
-            <div>
+            <div className="mb-5">
               <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary/25 w-max pe-3 mb-4">
                 Receiver Info
               </h3>
@@ -109,34 +138,11 @@ export default function ViewOrderPage() {
                 </span>
               </p>
             </div>
-            <div className="mt-10">
+            <div className="mt-5">
               <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary/25 w-max pe-3 mb-4">
-                Payment Info
+                Scan Parcel QR Code
               </h3>
-              <div className="flex items-center gap-2">
-                <p className="font-semibold text-primary">
-                  ৳{parcel.parcelCost} BDT
-                </p>
-              </div>
-
-              <div className="capitalize mt-3 flex gap-2 items-center">
-                {parcel.paymentStatus === "cod" ? (
-                  <p className="badge badge-primary badge-soft">
-                    cash on delivery
-                  </p>
-                ) : parcel.paymentStatus === "unpaid" ? (
-                  <>
-                    <p className="badge badge-warning badge-soft">
-                      {parcel.paymentStatus}
-                    </p>
-                    <button className="btn btn-primary btn-sm">Pay Now</button>
-                  </>
-                ) : (
-                  <p className="badge badge-success badge-soft">
-                    {parcel.paymentStatus}
-                  </p>
-                )}
-              </div>
+              <ParcelQRCode trackingId={parcel?.trackingId} />
             </div>
           </div>
         </div>

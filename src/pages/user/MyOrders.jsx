@@ -69,7 +69,7 @@ export default function MyOrdersPage() {
                               : "badge-info border-info/15"
                           }`}
                         >
-                          {p.parcelMovementStatus}
+                          {p.parcelMovementStatus.split("-").join(" ")}
                         </span>
                         <span
                           className={`badge badge-sm font-medium h-auto py-px ${

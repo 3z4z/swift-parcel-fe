@@ -84,6 +84,31 @@ export default function AllOrdersPage() {
       }
     });
   };
+  const handleCancelOrder = (parcel) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This parcel will be cancelled permanently!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Cancel Now",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await axios.patch(`/parcels/${parcel?._id}/cancel`, {
+          trackingId: parcel.trackingId,
+          location: parcel.location,
+        });
+        Swal.fire({
+          title: "Cancelled!",
+          text: "Order has been cancelled!",
+          icon: "success",
+        });
+        refetch();
+      }
+    });
+    console.log(parcel);
+  };
   if (isLoading) return <PageLoader />;
   return (
     <>
@@ -179,95 +204,110 @@ export default function AllOrdersPage() {
                       {p?.pickupRider?.riderName ?? "Not Assigned yet"}
                     </td>
                     <td>
-                      <div className="flex gap-1 *:py-1! *:px-4! *:btn *:btn-sm *:rounded-full *:btn-soft">
-                        {(() => {
-                          let details = "";
-                          switch (p?.parcelMovementStatus) {
-                            case "pending":
-                              return (
-                                <button
-                                  onClick={() => handleParcelAccept(p)}
-                                  className="btn-success border-success/25"
-                                >
-                                  Accept
-                                </button>
-                              );
-                            case "accepted":
-                              return (
-                                <button
-                                  onClick={() => handleAssignRider(p)}
-                                  className="btn-success border-success/25"
-                                >
-                                  Assign Rider
-                                </button>
-                              );
-                            case "to-central":
-                              details =
-                                "Parcel has been arrived at the central processing.";
-                              return (
-                                <button
-                                  onClick={() =>
-                                    handleOrderUpdate(p, "at-central", details)
-                                  }
-                                  className="btn-success border-success/25"
-                                >
-                                  Mark at Central
-                                </button>
-                              );
-                            case "at-central":
-                              details = "Parcel is going to the delivery hub.";
-                              return (
-                                <button
-                                  onClick={() =>
-                                    handleOrderUpdate(
-                                      p,
-                                      "to-delivery-hub",
-                                      details
-                                    )
-                                  }
-                                  className="btn-success border-success/25"
-                                >
-                                  Mark to Delivery Hub
-                                </button>
-                              );
-                            case "to-delivery-hub":
-                              details =
-                                "Parcel has been arrived at the delivery hub.";
-                              return (
-                                <button
-                                  onClick={() =>
-                                    handleOrderUpdate(
-                                      p,
-                                      "at-delivery-hub",
-                                      details,
-                                      deliveryLocation(
-                                        p.recipientDistrict,
-                                        locations
+                      <div className="flex justify-end gap-1 *:py-1! *:px-4! *:btn *:btn-sm *:rounded-full *:btn-soft">
+                        {p.parcelMovementStatus !== "cancelled" &&
+                          (() => {
+                            let details = "";
+                            switch (p?.parcelMovementStatus) {
+                              case "pending":
+                                return (
+                                  <button
+                                    onClick={() => handleParcelAccept(p)}
+                                    className="btn-success border-success/25"
+                                  >
+                                    Accept
+                                  </button>
+                                );
+                              case "accepted":
+                                return (
+                                  <button
+                                    onClick={() => handleAssignRider(p)}
+                                    className="btn-success border-success/25"
+                                  >
+                                    Assign Rider
+                                  </button>
+                                );
+                              case "to-central":
+                                details =
+                                  "Parcel has been arrived at the central processing.";
+                                return (
+                                  <button
+                                    onClick={() =>
+                                      handleOrderUpdate(
+                                        p,
+                                        "at-central",
+                                        details
                                       )
-                                    )
-                                  }
-                                  className="btn-success border-success/25"
-                                >
-                                  Mark at Delivery Hub
-                                </button>
-                              );
-                            case "at-delivery-hub":
-                              return (
-                                <button
-                                  onClick={() => handleAssignRider(p)}
-                                  className="btn-success border-success/25"
-                                >
-                                  Mark to Delivery
-                                </button>
-                              );
-                          }
-                        })()}
+                                    }
+                                    className="btn-success border-success/25"
+                                  >
+                                    Mark at Central
+                                  </button>
+                                );
+                              case "at-central":
+                                details =
+                                  "Parcel is going to the delivery hub.";
+                                return (
+                                  <button
+                                    onClick={() =>
+                                      handleOrderUpdate(
+                                        p,
+                                        "to-delivery-hub",
+                                        details
+                                      )
+                                    }
+                                    className="btn-success border-success/25"
+                                  >
+                                    Mark to Delivery Hub
+                                  </button>
+                                );
+                              case "to-delivery-hub":
+                                details =
+                                  "Parcel has been arrived at the delivery hub.";
+                                return (
+                                  <button
+                                    onClick={() =>
+                                      handleOrderUpdate(
+                                        p,
+                                        "at-delivery-hub",
+                                        details,
+                                        deliveryLocation(
+                                          p.recipientDistrict,
+                                          locations
+                                        )
+                                      )
+                                    }
+                                    className="btn-success border-success/25"
+                                  >
+                                    Mark at Delivery Hub
+                                  </button>
+                                );
+                              case "at-delivery-hub":
+                                return (
+                                  <button
+                                    onClick={() => handleAssignRider(p)}
+                                    className="btn-success border-success/25"
+                                  >
+                                    Mark to Delivery
+                                  </button>
+                                );
+                            }
+                          })()}
                         <Link
                           to={`/all-orders/${p._id}`}
                           className="btn-info border-info/25"
                         >
                           Details
                         </Link>
+                        {p.parcelMovementStatus !== "delivered" &&
+                          p.parcelMovementStatus !== "cancelled" && (
+                            <button
+                              onClick={() => handleCancelOrder(p)}
+                              className="btn-error border-error/25"
+                            >
+                              Cancel
+                            </button>
+                          )}
                       </div>
                     </td>
                   </tr>

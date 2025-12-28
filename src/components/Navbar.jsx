@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { useAuthStore } from "../stores/useAuthStore";
 import PrimarySpinnerLoader from "./loaders/PrimarySpinner";
 import useRole from "../hooks/useRole";
+import { LuScanLine } from "react-icons/lu";
 
 export default function NavbarComponent() {
   const { user, isAuthLoading, logout } = useAuthStore();
@@ -23,6 +24,12 @@ export default function NavbarComponent() {
           <button className="btn btn-secondary" onClick={handleLogout}>
             Log out
           </button>
+          {role === "agent" && (
+            <button className="btn shadow text-primary">
+              <LuScanLine className="size-5" />
+              <span>Scan</span>
+            </button>
+          )}
         </div>
       ) : (
         <>
