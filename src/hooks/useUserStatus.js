@@ -9,7 +9,7 @@ export default function useUserStatus() {
     queryKey: ["user-status", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/users/${user?.email}/status`
+        `${import.meta.env.VITE_API_BASE_URL}/users/${user?.email}/status`
       );
       return res.data;
     },
