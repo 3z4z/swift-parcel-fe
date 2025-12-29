@@ -96,6 +96,7 @@ export default function AllOrdersPage() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios.patch(`/parcels/${parcel?._id}/cancel`, {
+          senderEmail: parcel.senderEmail,
           trackingId: parcel.trackingId,
           location: parcel.location,
         });

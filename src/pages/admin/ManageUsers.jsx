@@ -21,7 +21,7 @@ export default function ManageUsersPage() {
   const updateStatus = async (user, status) => {
     setIsUpdating(true);
     const res = await axios.patch(`/users/${user._id}`, { status });
-    toast.success(res?.data?.message || "done!");
+    toast.success(res?.data?.message || "Done!");
     refetch();
     setIsUpdating(false);
   };

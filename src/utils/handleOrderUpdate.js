@@ -23,10 +23,13 @@ export const handleOrderUpdate = async (
   }).then(async (result) => {
     if (result.isConfirmed) {
       const updateOrder = {
+        senderEmail: order.senderEmail,
         parcelMovementStatus: status,
         trackingId: order.trackingId,
         details,
         location: location || order.location,
+        pickupRider: order?.pickupRider || {},
+        deliveryRider: order?.deliveryRider || {},
       };
       await axios.patch(`/parcels/${order._id}`, updateOrder);
       refetch();

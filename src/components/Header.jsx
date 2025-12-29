@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 socket.on("parcel-update", (data) => {
   console.log(data);
   toast.success(`${data?.trackingId} ${data?.details}`);
-  queryClient.invalidateQueries(["parcels"]);
+  queryClient.invalidateQueries(["parcels", "assigned-orders", "parcel"]);
 });
 socket.on("order-cancel", (data) => {
   console.log(data);
