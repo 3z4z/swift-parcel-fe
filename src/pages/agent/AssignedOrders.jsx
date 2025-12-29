@@ -33,9 +33,11 @@ export default function AssignedOrdersPage() {
     if (!scannedOrderTId) {
       return;
     }
+    if (!orders || orders.length === 0) {
+      return;
+    }
     const order = orders?.find((o) => o.trackingId === scannedOrderTId);
     if (!order) {
-      clearScan();
       return;
     }
     if (order.parcelMovementStatus === "assigned") {
