@@ -5,21 +5,16 @@ import DbPageTitle from "../../components/dashboard/PageTitle";
 import EmptyTableCard from "../../components/EmptyTableCard";
 import { IoCall } from "react-icons/io5";
 import { Link } from "react-router";
-import toast from "react-hot-toast";
 import { useRef, useState } from "react";
 import AssignRiderModal from "../../components/modals/AssignRiderModal";
 import Swal from "sweetalert2";
 import { deliveryLocation } from "../../utils/getDeliveryLocation";
 import useLocations from "../../hooks/useLocations";
+import { handleOrderUpdate } from "../../utils/handleOrderUpdate";
 
 export default function AllOrdersPage() {
   const locations = useLocations();
   const [selectedParcel, setSelectedParcel] = useState({});
-  const centralCity = locations.find((l) => l.city === "Dhaka");
-  const centralLocation = {
-    lat: centralCity?.latitude,
-    lng: centralCity?.longitude,
-  };
   const axios = useAxios();
   const {
     data: parcels,
@@ -32,57 +27,12 @@ export default function AllOrdersPage() {
       return res.data;
     },
   });
-  const handleParcelAccept = async (parcel) => {
-    try {
-      const res = await axios.patch(`/parcels/${parcel._id}`, {
-        parcelMovementStatus: "accepted",
-        trackingId: parcel.trackingId,
-        details: "Order has been accepted",
-        location: parcel.location,
-      });
-      if (res.status === 200) {
-        toast.success("Parcel Accepted!");
-        refetch();
-      }
-    } catch (err) {
-      toast.error(
-        err?.response?.data?.message || err?.message || "Something went wrong"
-      );
-    }
-  };
+
   const assignRiderModalRef = useRef();
   const handleAssignRider = (parcel) => {
     assignRiderModalRef.current.showModal();
     setSelectedParcel(parcel);
     refetch();
-  };
-  const handleOrderUpdate = async (order, status, details, location) => {
-    const filteredStatus = status.split("-").join(" ");
-    Swal.fire({
-      title: `Mark as ${filteredStatus}?`,
-      text: `This parcel will be marked as ${filteredStatus}!`,
-      icon: "info",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Confirm",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const updateOrder = {
-          parcelMovementStatus: status,
-          trackingId: order.trackingId,
-          details,
-          location: location || centralLocation,
-        };
-        await axios.patch(`/parcels/${order._id}`, updateOrder);
-        refetch();
-        Swal.fire({
-          title: "Status updated!",
-          text: `Parcel status changed to ${filteredStatus}.`,
-          icon: "success",
-        });
-      }
-    });
   };
   const handleCancelOrder = (parcel) => {
     Swal.fire({
@@ -211,9 +161,20 @@ export default function AllOrdersPage() {
                             let details = "";
                             switch (p?.parcelMovementStatus) {
                               case "pending":
+                                details = "Order has been accepted";
                                 return (
                                   <button
-                                    onClick={() => handleParcelAccept(p)}
+                                    // onClick={() => handleParcelAccept(p)}
+                                    onClick={() =>
+                                      handleOrderUpdate(
+                                        axios,
+                                        refetch,
+                                        p,
+                                        "accepted",
+                                        details,
+                                        p.location
+                                      )
+                                    }
                                     className="btn-success border-success/25"
                                   >
                                     Accept
@@ -235,6 +196,8 @@ export default function AllOrdersPage() {
                                   <button
                                     onClick={() =>
                                       handleOrderUpdate(
+                                        axios,
+                                        refetch,
                                         p,
                                         "at-central",
                                         details
@@ -252,6 +215,8 @@ export default function AllOrdersPage() {
                                   <button
                                     onClick={() =>
                                       handleOrderUpdate(
+                                        axios,
+                                        refetch,
                                         p,
                                         "to-delivery-hub",
                                         details
@@ -269,6 +234,8 @@ export default function AllOrdersPage() {
                                   <button
                                     onClick={() =>
                                       handleOrderUpdate(
+                                        axios,
+                                        refetch,
                                         p,
                                         "at-delivery-hub",
                                         details,
