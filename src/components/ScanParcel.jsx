@@ -1,8 +1,10 @@
 import { useRef, useEffect } from "react";
 import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 import { useScanStore } from "../stores/useScanStore";
+import { useNavigate } from "react-router";
 
 export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
+  const navigate = useNavigate();
   const { setScannedOrderTId, scannedOrderTId } = useScanStore();
   const videoRef = useRef();
 
@@ -16,6 +18,7 @@ export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
         const text = res.getText();
         setScannedOrderTId(text);
         if (onScan) onScan(text);
+        navigate("/assigned-orders");
       }
       if (err && !(err instanceof NotFoundException)) {
         console.error(err);
@@ -23,7 +26,7 @@ export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
     });
 
     return () => codeReader.reset();
-  }, [onScan, setScannedOrderTId]);
+  }, [onScan, setScannedOrderTId, navigate]);
 
   return (
     <dialog ref={scanParcelModalRef} className="modal">
