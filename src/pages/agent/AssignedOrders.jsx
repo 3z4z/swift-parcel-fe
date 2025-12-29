@@ -8,9 +8,12 @@ import { Link } from "react-router";
 import Swal from "sweetalert2";
 import { deliveryLocation } from "../../utils/getDeliveryLocation";
 import useLocations from "../../hooks/useLocations";
+import { useEffect } from "react";
+import { useScanStore } from "../../stores/useScanStore";
 // import { getGeoLocation } from "../../utils/geoLocation";
 
 export default function AssignedOrdersPage() {
+  const { scannedOrderTId, clearScan } = useScanStore();
   const locations = useLocations();
   const { user } = useAuthStore();
   const axios = useAxios();
@@ -56,6 +59,31 @@ export default function AssignedOrdersPage() {
       }
     });
   };
+  useEffect(() => {
+    if (!scannedOrderTId) {
+      return;
+    }
+    const order = orders.find((o) => o.trackingId === scannedOrderTId);
+    if (!order) {
+      return;
+    }
+    if (order.parcelMovementStatus === "assigned") {
+      handleOrderUpdate(
+        order,
+        "picked",
+        `Parcel has been picked from sender's pickup location.`
+      );
+    }
+    if (order.parcelMovementStatus === "assigned-to-deliver") {
+      handleOrderUpdate(
+        order,
+        "delivered",
+        `Parcel has been delivered to the customer successfully.`,
+        deliveryLocation(order.recipientDistrict, locations)
+      );
+    }
+    clearScan();
+  }, [handleOrderUpdate, locations, orders, scannedOrderTId, clearScan]);
   return (
     <>
       <DbPageTitle title={"Assigned orders to me"} />
@@ -155,7 +183,7 @@ export default function AssignedOrdersPage() {
                                 }
                                 className="btn btn-sm py-1! px-4! btn-success btn-soft border-success/15"
                               >
-                                Mark as delivered
+                                Mark delivered
                               </button>
                             );
                         }

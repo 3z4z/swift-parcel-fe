@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
+import { useScanStore } from "../stores/useScanStore";
 
 export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
-  const [result, setResult] = useState("");
+  const { setScannedOrderTId, scannedOrderTId } = useScanStore();
   const videoRef = useRef();
 
   useEffect(() => {
@@ -13,7 +14,7 @@ export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
     codeReader.decodeFromVideoDevice(null, videoRef.current, (res, err) => {
       if (res) {
         const text = res.getText();
-        setResult(text);
+        setScannedOrderTId(text);
         if (onScan) onScan(text);
       }
       if (err && !(err instanceof NotFoundException)) {
@@ -22,7 +23,7 @@ export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
     });
 
     return () => codeReader.reset();
-  }, [onScan]);
+  }, [onScan, setScannedOrderTId]);
 
   return (
     <dialog ref={scanParcelModalRef} className="modal">
@@ -30,7 +31,7 @@ export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
         <video ref={videoRef} style={{ width: "100%" }} />
         <p>
           <span>Last result: </span>
-          <span>{result}</span>
+          <span>{scannedOrderTId}</span>
         </p>
         <div className="modal-action">
           <button
