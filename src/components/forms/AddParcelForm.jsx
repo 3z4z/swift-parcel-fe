@@ -81,7 +81,7 @@ export default function AddParcelForm({ getLocations }) {
   };
   return (
     <form onSubmit={handleSubmit(handleAddParcel)} className="fieldset">
-      <div className="flex mb-2 gap-8">
+      <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
           <label className="label">Product Type</label>
           <select className="select w-full" {...register("productType")}>
@@ -98,7 +98,7 @@ export default function AddParcelForm({ getLocations }) {
           </select>
         </div>
       </div>
-      <div className="flex mb-2 gap-8">
+      <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
           <label className="label">Parcel Weight</label>
           <input
@@ -160,7 +160,7 @@ export default function AddParcelForm({ getLocations }) {
           </div>
         </div>
       </div>
-      <div className="flex mb-2 gap-8">
+      <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
           <label className="label">Payment Type</label>
           <select className="select w-full" {...register("paymentType")}>
@@ -188,7 +188,7 @@ export default function AddParcelForm({ getLocations }) {
           )}
         </div>
       </div>
-      <div className="flex gap-4 mb-2">
+      <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
           <label className="label">Pickup Division</label>
           <select
@@ -245,7 +245,7 @@ export default function AddParcelForm({ getLocations }) {
         placeholder="Enter special instructions (optional)"
         {...register("optionalInstructions")}
       ></textarea>
-      <div className="flex mt-4 mb-2 gap-8">
+      <div className="flex max-sm:flex-col mt-4 mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
           <label className="label">Recipient Name</label>
           <input
@@ -276,7 +276,7 @@ export default function AddParcelForm({ getLocations }) {
         </div>
       </div>
 
-      <div className="flex gap-4 mb-2">
+      <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
           <label className="label">Recipient Division</label>
           <select

@@ -5,7 +5,6 @@ import useAxios from "../../hooks/useAxios";
 import PageLoader from "../../components/loaders/PageLoader/PageLoader";
 import EmptyTableCard from "../../components/EmptyTableCard";
 import { Link } from "react-router";
-import Swal from "sweetalert2";
 import { deliveryLocation } from "../../utils/getDeliveryLocation";
 import useLocations from "../../hooks/useLocations";
 import { useEffect } from "react";
@@ -83,7 +82,7 @@ export default function AssignedOrdersPage() {
                 <tr key={i}>
                   <td>{i + 1}</td>
 
-                  <td className="font-medium">
+                  <td className="font-medium min-w-52">
                     <p className="capitalize mb-1">
                       {o.productType} -
                       <span>
@@ -114,7 +113,7 @@ export default function AssignedOrdersPage() {
                     </small>
                   </td>
                   <td>
-                    <div className="flex gap-1">
+                    <div className="flex justify-end gap-1">
                       {(() => {
                         let details =
                           "Parcel has been picked from pickup location.";

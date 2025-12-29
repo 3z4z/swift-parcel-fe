@@ -15,6 +15,11 @@ import { handleOrderUpdate } from "../../utils/handleOrderUpdate";
 export default function AllOrdersPage() {
   const locations = useLocations();
   const [selectedParcel, setSelectedParcel] = useState({});
+  const centralCity = locations.find((l) => l.city === "Dhaka");
+  const centralLocation = {
+    lat: centralCity?.latitude,
+    lng: centralCity?.longitude,
+  };
   const axios = useAxios();
   const {
     data: parcels,
@@ -74,7 +79,6 @@ export default function AllOrdersPage() {
                 <th>Parcel Info</th>
                 <th>Status</th>
                 <th>Recipient Info</th>
-                <th>Assigned to</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -91,7 +95,7 @@ export default function AllOrdersPage() {
                       <p className="font-medium text-primary">{p.senderName}</p>
                       <small className="text-neutral/70">{p.senderEmail}</small>
                     </td>
-                    <td className="font-medium">
+                    <td className="font-medium min-w-52">
                       <p className="capitalize mb-1">
                         {p.productType} -
                         <span>
@@ -145,15 +149,6 @@ export default function AllOrdersPage() {
                         {p.recipientContact}
                       </p>
                     </td>
-                    <td
-                      className={
-                        p?.pickupRider?.riderName
-                          ? "font-medium"
-                          : "text-neutral/70"
-                      }
-                    >
-                      {p?.pickupRider?.riderName ?? "Not Assigned yet"}
-                    </td>
                     <td>
                       <div className="flex justify-end gap-1 *:py-1! *:px-4! *:btn *:btn-sm *:rounded-full *:btn-soft">
                         {p.parcelMovementStatus !== "cancelled" &&
@@ -200,7 +195,8 @@ export default function AllOrdersPage() {
                                         refetch,
                                         p,
                                         "at-central",
-                                        details
+                                        details,
+                                        centralLocation
                                       )
                                     }
                                     className="btn-success border-success/25"
@@ -219,7 +215,8 @@ export default function AllOrdersPage() {
                                         refetch,
                                         p,
                                         "to-delivery-hub",
-                                        details
+                                        details,
+                                        centralLocation
                                       )
                                     }
                                     className="btn-success border-success/25"

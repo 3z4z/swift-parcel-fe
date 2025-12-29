@@ -38,7 +38,9 @@ export default function ParcelTrackingTimeline({ parcel }) {
               )}
               <div className="timeline-start mb-2">
                 <figure
-                  className={`w-9 h-9 ${isHighlighted ? "" : "grayscale"}`}
+                  className={`size-9 max-md:size-6 ${
+                    isHighlighted ? "" : "grayscale"
+                  }`}
                 >
                   <img
                     src={timeline.icon}
@@ -55,7 +57,7 @@ export default function ParcelTrackingTimeline({ parcel }) {
                 />
               </div>
               <div
-                className={`timeline-end timeline-box w-24 text-center ${
+                className={`timeline-end timeline-box md:w-24 w-16 max-md:text-xs max-md:p-1 text-center ${
                   isActive
                     ? "text-primary bg-base-100 font-semibold"
                     : "text-neutral/50 bg-base-200 shadow-none"
@@ -94,14 +96,14 @@ export default function ParcelTrackingTimeline({ parcel }) {
                 log.deliveryStatus !== "cancelled"
                   ? "first:border-s-success"
                   : "first:border-s-error"
-              } border-s-neutral/50 border-s-3 mb-3 last:mb-0 my-4 px-3 rounded-e-2xl min-w-84 w-max group`}
+              } border-s-neutral/50 border-s-3 mb-3 last:mb-0 my-4 px-3 rounded-e-2xl max-sm:text-sm group`}
             >
               <p
                 className={`${
                   log.deliveryStatus !== "cancelled"
                     ? "group-first:text-accent"
                     : "group-first:text-error"
-                } text-neutral/90 font-medium text-[0.9375rem]`}
+                } text-neutral/90 font-medium text-[0.9375rem] whitespace-break-spaces`}
               >
                 {log.details}
               </p>

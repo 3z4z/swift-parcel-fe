@@ -19,9 +19,9 @@ export default function ViewOrderPage() {
   });
   if (isLoading) return <PageLoader />;
   return (
-    <div className="grid grid-cols-5 bg-base-300 rounded-2xl p-5 gap-10">
-      <div className="col-span-3">
-        <div className="bg-base-100 border-primary/20 p-4 grid grid-cols-2 rounded-xl">
+    <div className="grid 2xl:grid-cols-5 xl:grid-cols-6 bg-base-300 rounded-2xl p-5 gap-10">
+      <div className="xl:col-span-3 max-xl:order-2">
+        <div className="bg-base-100 border-primary/20 p-4 grid md:grid-cols-2 rounded-xl">
           <div>
             <div>
               <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary/25 w-max pe-3 mb-4">
@@ -113,7 +113,7 @@ export default function ViewOrderPage() {
               </div>
             </div>
           </div>
-          <div>
+          <div className="max-md:mt-5">
             <div className="mb-5">
               <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary/25 w-max pe-3 mb-4">
                 Receiver Info
@@ -147,7 +147,7 @@ export default function ViewOrderPage() {
           </div>
         </div>
       </div>
-      <div className="col-span-2">
+      <div className="2xl:col-span-2 xl:col-span-3">
         <ParcelTrackingTimeline parcel={parcel} />
       </div>
     </div>

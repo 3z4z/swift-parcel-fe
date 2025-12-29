@@ -3,26 +3,14 @@ import LogoComponent from "./Logo";
 import NavbarComponent from "./Navbar";
 import { socket } from "../socket";
 import toast from "react-hot-toast";
-import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useAuthStore } from "../stores/useAuthStore";
 
-// const queryClient = new QueryClient();
-// socket.on("parcel-update", (data) => {
-//   console.log(data);
-//   toast.success(`${data?.trackingId} ${data?.details}`);
-//   queryClient.invalidateQueries(["parcels", "assigned-orders", "parcel"]);
-// });
-// socket.on("order-cancel", (data) => {
-//   console.log(data);
-//   toast.error(`${data?.trackingId} ${data?.details}`);
-//   queryClient.invalidateQueries(["parcels"]);
-// });
 export default function HeaderComponent() {
-  const { user, isUserReady } = useAuthStore();
+  const { user } = useAuthStore();
   const queryClient = useQueryClient();
   useEffect(() => {
-    if (!isUserReady) return;
     if (user?.email) {
       socket.emit("join-room", user?.email);
       const handleParcelUpdate = (data) => {
@@ -42,7 +30,7 @@ export default function HeaderComponent() {
         socket.off("order-cancel", handleOrderCancel);
       };
     }
-  }, [user, queryClient, isUserReady]);
+  }, [user, queryClient]);
   return (
     <header className="w-full p-3 flex justify-between items-center">
       <Link to={"/"}>

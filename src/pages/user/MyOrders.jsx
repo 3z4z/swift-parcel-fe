@@ -45,15 +45,17 @@ export default function MyOrdersPage() {
                 myParcels.map((p, i) => (
                   <tr key={i}>
                     <td>{i + 1}</td>
-                    <td>
-                      <p className="capitalize font-medium">
+                    <td className="min-w-52 font-medium">
+                      <p className="capitalize">
                         {p.productType} -
                         <span>
                           {" "}
                           {p.productQts} Items - {p.parcelWeight}Kg
                         </span>
                       </p>
-                      <p className="text-neutral/70">TID: {p.trackingId}</p>
+                      <p className="text-neutral/70 text-xs">
+                        TID: {p.trackingId}
+                      </p>
                     </td>
                     <td>
                       <div className="flex gap-1 items-center capitalize">
