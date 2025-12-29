@@ -10,6 +10,7 @@ import { deliveryLocation } from "../../utils/getDeliveryLocation";
 import useLocations from "../../hooks/useLocations";
 import { useEffect } from "react";
 import { useScanStore } from "../../stores/useScanStore";
+import { handleOrderUpdate } from "../../utils/handleOrderUpdate";
 // import { getGeoLocation } from "../../utils/geoLocation";
 
 export default function AssignedOrdersPage() {
@@ -28,38 +29,6 @@ export default function AssignedOrdersPage() {
       return res.data;
     },
   });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const handleOrderUpdate = async (order, status, details, location) => {
-    // To get dynamic locations, this call is needed.
-    // const { lat, lng } = await getGeoLocation();
-    const filteredStatus = status.split("-").join(" ");
-
-    Swal.fire({
-      title: `Mark as ${filteredStatus}?`,
-      text: `This parcel will be marked as ${filteredStatus}!`,
-      icon: "info",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Confirm",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const updateOrder = {
-          parcelMovementStatus: status,
-          trackingId: order.trackingId,
-          details,
-          location: location || order.location,
-        };
-        await axios.patch(`/parcels/${order._id}`, updateOrder);
-        refetch();
-        Swal.fire({
-          title: "Status updated!",
-          text: `Parcel status changed to ${filteredStatus}.`,
-          icon: "success",
-        });
-      }
-    });
-  };
   useEffect(() => {
     if (!scannedOrderTId) {
       return;
@@ -71,21 +40,25 @@ export default function AssignedOrdersPage() {
     }
     if (order.parcelMovementStatus === "assigned") {
       handleOrderUpdate(
+        axios,
+        refetch,
         order,
         "picked",
-        `Parcel has been picked from sender's pickup location.`
+        `Parcel has been picked from sender's pickup location`
       );
     }
     if (order.parcelMovementStatus === "assigned-to-deliver") {
       handleOrderUpdate(
+        axios,
+        refetch,
         order,
         "delivered",
-        `Parcel has been delivered to the customer successfully.`,
+        `Parcel has been delivered to the customer successfully`,
         deliveryLocation(order.recipientDistrict, locations)
       );
     }
     clearScan();
-  }, [handleOrderUpdate, locations, orders, scannedOrderTId, clearScan]);
+  }, [locations, orders, scannedOrderTId, clearScan, axios, refetch]);
   return (
     <>
       <DbPageTitle title={"Assigned orders to me"} />
@@ -149,7 +122,13 @@ export default function AssignedOrdersPage() {
                             return (
                               <button
                                 onClick={() =>
-                                  handleOrderUpdate(o, "picked", details)
+                                  handleOrderUpdate(
+                                    axios,
+                                    refetch,
+                                    o,
+                                    "picked",
+                                    details
+                                  )
                                 }
                                 className="btn btn-sm py-1! px-4! btn-success btn-soft border-success/15"
                               >
@@ -161,7 +140,13 @@ export default function AssignedOrdersPage() {
                             return (
                               <button
                                 onClick={() =>
-                                  handleOrderUpdate(o, "to-central", details)
+                                  handleOrderUpdate(
+                                    axios,
+                                    refetch,
+                                    o,
+                                    "to-central",
+                                    details
+                                  )
                                 }
                                 className="btn btn-sm py-1! px-4! btn-success btn-soft border-success/15"
                               >
@@ -174,6 +159,8 @@ export default function AssignedOrdersPage() {
                               <button
                                 onClick={() =>
                                   handleOrderUpdate(
+                                    axios,
+                                    refetch,
                                     o,
                                     "delivered",
                                     details,
