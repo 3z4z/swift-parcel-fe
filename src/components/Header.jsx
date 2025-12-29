@@ -22,7 +22,7 @@ export default function HeaderComponent() {
   const { user, isUserReady } = useAuthStore();
   const queryClient = useQueryClient();
   useEffect(() => {
-    if (!isUserReady) return null;
+    if (!isUserReady) return;
     if (user?.email) {
       socket.emit("join-room", user?.email);
       const handleParcelUpdate = (data) => {
