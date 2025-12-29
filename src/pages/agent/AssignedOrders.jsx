@@ -28,6 +28,7 @@ export default function AssignedOrdersPage() {
       return res.data;
     },
   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleOrderUpdate = async (order, status, details, location) => {
     // To get dynamic locations, this call is needed.
     // const { lat, lng } = await getGeoLocation();
@@ -63,8 +64,9 @@ export default function AssignedOrdersPage() {
     if (!scannedOrderTId) {
       return;
     }
-    const order = orders.find((o) => o.trackingId === scannedOrderTId);
+    const order = orders?.find((o) => o.trackingId === scannedOrderTId);
     if (!order) {
+      clearScan();
       return;
     }
     if (order.parcelMovementStatus === "assigned") {
