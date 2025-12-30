@@ -57,7 +57,7 @@ yarn install
 
 - **Create environment variables**
 
-Create a `.env` file in the root
+Create a `.env.local` file in the root
 
 ```
 VITE_API_KEY = <firebase-api-key>
