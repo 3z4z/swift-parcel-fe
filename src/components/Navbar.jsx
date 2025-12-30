@@ -25,8 +25,8 @@ export default function NavbarComponent() {
     await logout();
   };
   return (
-    <div className="flex gap-1">
-      <nav className="me-5">
+    <div className="flex gap-1 items-center">
+      <nav className="md:me-5">
         {isAuthLoading ? (
           <PrimarySpinnerLoader />
         ) : user ? (

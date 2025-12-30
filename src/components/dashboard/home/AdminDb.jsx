@@ -9,6 +9,7 @@ import PageLoader from "../../loaders/PageLoader/PageLoader";
 import SummaryChartComponent from "../../charts/SummaryChart";
 import useAnalytics from "../../../hooks/useAnalytics";
 import { useTranslation } from "react-i18next";
+import DailyBookingChart from "../../charts/DailyBookingChart";
 
 export default function AdminDbHome() {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ export default function AdminDbHome() {
         {t("title")} {t("admin")}!{" "}
         <span className="font-semibold">{user?.displayName}</span>
       </h1>
-      <div className="grid grid-cols-4 gap-6 py-4">
+      <div className="grid lg:grid-cols-4 sm:grid-cols-2 gap-6 py-4">
         <div className="bg-base-200 p-5 rounded-xl shadow flex items-center justify-between">
           <div>
             <LuHourglass className="size-10 p-2 rounded-lg bg-warning/9 text-warning" />
@@ -68,11 +69,15 @@ export default function AdminDbHome() {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-6 py-4">
+      <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 gap-6 py-4">
         <div className="bg-base-200 rounded-3xl shadow">
           <SummaryChartComponent />
         </div>
-        <div className="col-span-3"></div>
+        <div className="2xl:col-span-3 xl:col-span-2">
+          <div className="bg-base-200 rounded-3xl shadow">
+            <DailyBookingChart />
+          </div>
+        </div>
       </div>
     </>
   );

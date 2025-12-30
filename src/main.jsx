@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./i18n";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import "leaflet/dist/leaflet.css";
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(

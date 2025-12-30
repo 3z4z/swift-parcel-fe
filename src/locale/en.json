@@ -28,7 +28,8 @@
     "pending": "Pending",
     "assigned": "Assigned",
     "delivered": "Delivered",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "total": "Total"
   },
   "auth": {
     "login": "Login",

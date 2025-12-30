@@ -30,13 +30,13 @@ export default function SummaryChartComponent() {
     value: lookup[k] || 0,
     fill: colors[k],
   }));
-  console.log("codAmount", codAmount[0]?.total);
   return (
     <PieChart
       responsive
       style={{
         height: "100%",
         width: "100%",
+        maxHeight: "45vh",
       }}
     >
       <Pie
@@ -47,7 +47,11 @@ export default function SummaryChartComponent() {
         innerRadius="60%"
         isAnimationActive={false}
       />
-      <Label position="center" fill="#666" className="text-xl font-bold">
+      <Label
+        position="center"
+        fill="#666"
+        className="md:text-xl text-sm font-bold"
+      >
         {`COD: ৳${codAmount[0]?.total ?? "0"} ${t("bdt")}`}
       </Label>
     </PieChart>

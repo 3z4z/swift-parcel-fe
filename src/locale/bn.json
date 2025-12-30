@@ -25,10 +25,11 @@
     "actions": "অ্যাকশনস"
   },
   "status": {
-    "pending": "মুলতুবি",
+    "pending": "পেন্ডিং",
     "assigned": "নির্ধারিত",
-    "delivered": "পাঠানো",
-    "cancelled": "বাতিল"
+    "delivered": "নিষ্কৃত",
+    "cancelled": "বাতিল",
+    "total": "মোট"
   },
   "auth": {
     "login": "লগইন",
