@@ -73,9 +73,7 @@ VITE_API_BASE_URL = <api-base-url>
 Run the app locally
 
 ```
-npm start
-# or
-yarn start
+npm run dev
 ```
 
 Open http://localhost:5173 (default) to view the app in the browser.
