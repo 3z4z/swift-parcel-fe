@@ -18,8 +18,8 @@ export default function useAxios() {
       (err) => {
         const status = err?.response?.status;
         if (status === 401 || status === 403) {
-          //   signOut();
-          //   navigate("/auth/login");
+          signOut();
+          navigate("/auth/login");
           console.log("error");
         }
         return Promise.reject(err);

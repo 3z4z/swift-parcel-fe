@@ -25,7 +25,7 @@ export default function AllOrdersPage() {
   };
   const axios = useAxios();
   const {
-    data: parcels,
+    data: parcels = [],
     isLoading,
     refetch,
   } = useQuery({
