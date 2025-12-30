@@ -1,0 +1,145 @@
+{
+  "title": "স্বাগতম",
+  "slogan": "যেকোনো জায়গায় আপনার মূল্যবান পার্সেল পাঠান খুব সহজে",
+  "admin": "অ্যাডমিন",
+  "agent": "প্রতিনিধি",
+  "user": "ইউজার",
+  "bdt": "টাকা",
+  "all_orders": "সকল অর্ডারসমূহ",
+  "my_orders": "আমার অর্ডারসমূহ",
+  "all_users": "সকল ব্যবহারকারী",
+  "assigned_orders": "আমাকে অর্পিত অর্ডারসমূহ",
+  "add_parcel": "নতুন পার্সেল যোগ করুন",
+  "table": {
+    "sl_no": "ক্রমিক নং",
+    "sender_info": "প্রেরকের তথ্য",
+    "recipient_info": "প্রাপকের তথ্য",
+    "pickup_info": "পিকআপ তথ্য",
+    "name": "নাম",
+    "role": "ভূমিকা",
+    "preferred_city": "পছন্দের কর্মস্থল শহর",
+    "parcel_info": "পার্সেল তথ্য",
+    "parcel_cost": "পার্সেল খরচ",
+    "pickup_amount": "পিকআপের পরিমাণ টাকায়",
+    "status": "অবস্থা",
+    "actions": "অ্যাকশনস"
+  },
+  "status": {
+    "pending": "মুলতুবি",
+    "assigned": "নির্ধারিত",
+    "delivered": "পাঠানো",
+    "cancelled": "বাতিল"
+  },
+  "auth": {
+    "login": "লগইন",
+    "register": "নিবন্ধন",
+    "logout": "লগআউট",
+    "title": "এ স্বাগতম"
+  },
+  "nav": {
+    "send_parcel": "পার্সেল পাঠান",
+    "scan": "স্ক্যান করুন"
+  },
+  "form": {
+    "titles": {
+      "create_account": "অ্যাকাউন্ট তৈরি করুন",
+      "old_user": "আগেই ব্যবহারকারী?",
+      "login": "এখনই লগইন করুন",
+      "new_user": "এখানে নতুন?",
+      "cost_calculator": "খরচ ক্যালকুলেটর"
+    },
+    "labels": {
+      "full_name": "পুরো নাম",
+      "email": "ইমেইল",
+      "password": "পাসওয়ার্ড",
+      "confirm_password": "পাসওয়ার্ড নিশ্চিত করুন",
+      "preferred_city": "পছন্দের কর্মস্থল শহর",
+      "role": "ভূমিকা নির্বাচন করুন",
+      "parcel_type": "পার্সেলের ধরণ",
+      "delivery_type": "ডেলিভারির ধরণ",
+      "delivery_location": "ডেলিভারি স্থান",
+      "payment_type": "পেমেন্টের ধরণ",
+      "parcel_weight": "পার্সেলের ওজন",
+      "product_qts": "পণ্যের পরিমাণ",
+      "amount_collect": "টাকা সংগ্রহের পরিমাণ টাইপ করুন",
+      "pickup_division": "পিকআপ বিভাগ",
+      "pickup_district": "পিকআপ জেলা",
+      "pickup_address": "পিকআপ ঠিকানা",
+      "instructions": "বিশেষ নির্দেশনা",
+      "recipient_name": "প্রাপকের নাম",
+      "recipient_contact": "প্রাপকের যোগাযোগ নম্বর",
+      "recipient_division": "প্রাপক বিভাগ",
+      "recipient_district": "প্রাপক জেলা",
+      "recipient_address": "প্রাপকের ঠিকানা"
+    },
+    "options": {
+      "select_preferred_city": "পছন্দের কর্মস্থল শহর নির্বাচন করুন",
+      "select_pickup_division": "পিকআপ বিভাগ নির্বাচন করুন",
+      "select_pickup_district": "পিকআপ জেলা নির্বাচন করুন",
+      "select_recipient_division": "প্রাপক বিভাগ নির্বাচন করুন",
+      "select_recipient_district": "প্রাপক জেলা নির্বাচন করুন"
+    },
+    "actions": {
+      "login_now": "লগইন করুন",
+      "logging_in": "লগ ইন করা হচ্ছে",
+      "register": "নিবন্ধন",
+      "registering": "নিবন্ধন করা হচ্ছে",
+      "calculator": "ক্যালকুলেটর",
+      "calculate_now": "হিসাব করুন",
+      "send_now": "এখনই পাঠান",
+      "sending": "পাঠানো হচ্ছে"
+    },
+    "validations": {
+      "name": "নাম প্রয়োজন",
+      "email": "ইমেল প্রয়োজন",
+      "password": "পাসওয়ার্ড প্রয়োজন",
+      "password_mismatch": "পাসওয়ার্ড মিলছে না!",
+      "preferred_city": "পছন্দের শহরটি প্রয়োজন",
+      "parcel_weight": "পার্সেলের ওজন প্রয়োজন",
+      "parcel_weight_int": "দশমিক সংখ্যা অনুমোদিত নয়",
+      "parcel_weight_min": "১ কেজির নিচে ওজন অনুমোদিত নয়। ১ কেজির নিচে যেকোনো ওজন ১ হিসেবে বিবেচিত হবে।",
+      "parcel_weight_max": "ওজন ১০ কেজির বেশি হওয়া উচিত নয়",
+      "pickup_amount": "পিকআপের পরিমাণ প্রয়োজন",
+      "pickup_division": "পিকআপ বিভাগ প্রয়োজন",
+      "pickup_district": "পিকআপ জেলা প্রয়োজন",
+      "pickup_address": "সম্পূর্ণ পিকআপ ঠিকানা প্রয়োজন",
+      "recipient_name": "প্রাপকের নাম আবশ্যক",
+      "recipient_contact": "প্রাপকের যোগাযোগ নম্বর প্রয়োজন",
+      "recipient_division": "প্রাপক বিভাগ আবশ্যক",
+      "recipient_district": "প্রাপকের জেলা উল্লেখ করা আবশ্যক",
+      "recipient_address": "সম্পূর্ণ প্রাপক ঠিকানা প্রয়োজন"
+    },
+    "placeholders": {
+      "parcel_weight": "পার্সেলের ওজন কেজিতে টাইপ করুন",
+      "amount_collect": "টাকায় সংগ্রহের পরিমাণ লিখুন",
+      "pickup_address": "সম্পূর্ণ পিকআপ ঠিকানা লিখুন",
+      "instructions": "বিশেষ নির্দেশাবলী লিখুন (ঐচ্ছিক)",
+      "recipient_name": "প্রাপকের নাম টাইপ করুন",
+      "recipient_contact": "প্রাপকের যোগাযোগ নম্বর টাইপ করুন",
+      "recipient_address": "সম্পূর্ণ প্রাপকের ঠিকানা লিখুন"
+    },
+    "toasts": {
+      "success": {
+        "registration": "ব্যবহারকারী নিবন্ধন সফল হয়েছে!",
+        "login": "সফলভাবে লগ ইন করা হয়েছে!"
+      }
+    }
+  },
+  "parcel": {
+    "parcel_info": "পার্সেলের তথ্য",
+    "tracking_id": "ট্র্যাকিং আইডি",
+    "movement_status": "চলাচলের অবস্থা",
+    "product_type": "পণ্যের ধরণ",
+    "parcel_weight": "পার্সেলের ওজন",
+    "product_qts": "পণ্যের পরিমাণ",
+    "delivery_type": "ডেলিভারির ধরণ",
+    "pickup_address": "পিকআপ ঠিকানা",
+    "pickup_location": "পিকআপের স্থান",
+    "instruction": "বিশেষ নির্দেশনা",
+    "payment_info": "পেমেন্টের তথ্য",
+    "receiver_info": "প্রাপকের তথ্য",
+    "address": "ঠিকানা ",
+    "location": "স্থান",
+    "scan": "পার্সেল QR কোড স্ক্যান করুন"
+  }
+}

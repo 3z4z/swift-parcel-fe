@@ -6,8 +6,10 @@ import { IoCall } from "react-icons/io5";
 import { Link } from "react-router";
 import PageLoader from "../../components/loaders/PageLoader/PageLoader";
 import EmptyTableCard from "../../components/EmptyTableCard";
+import { useTranslation } from "react-i18next";
 
 export default function MyOrdersPage() {
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const axios = useAxios();
   const { data: myParcels, isLoading } = useQuery({
@@ -19,7 +21,7 @@ export default function MyOrdersPage() {
   });
   return (
     <>
-      <DbPageTitle title={"My Orders"} />
+      <DbPageTitle title={t("my_orders")} />
       {isLoading ? (
         <PageLoader />
       ) : myParcels.length > 0 ? (
@@ -27,13 +29,13 @@ export default function MyOrdersPage() {
           <table className="table">
             <thead className="bg-base-200">
               <tr>
-                <th>Sl No.</th>
-                <th>Parcel Info</th>
-                <th>Status</th>
-                <th>Parcel Cost</th>
-                <th>Pickup Amount</th>
-                <th>Recipient Info</th>
-                <th>Actions</th>
+                <th>{t("table.sl_no")}</th>
+                <th>{t("table.parcel_info")}</th>
+                <th>{t("table.status")}</th>
+                <th>{t("table.parcel_cost")}</th>
+                <th>{t("table.pickup_amount")}</th>
+                <th>{t("table.recipient_info")}</th>
+                <th>{t("table.actions")}</th>
               </tr>
             </thead>
             <tbody>

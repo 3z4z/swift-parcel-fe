@@ -11,8 +11,10 @@ import Swal from "sweetalert2";
 import { deliveryLocation } from "../../utils/getDeliveryLocation";
 import useLocations from "../../hooks/useLocations";
 import { handleOrderUpdate } from "../../utils/handleOrderUpdate";
+import { useTranslation } from "react-i18next";
 
 export default function AllOrdersPage() {
+  const { t } = useTranslation();
   const locations = useLocations();
   const [selectedParcel, setSelectedParcel] = useState({});
   const centralCity = locations.find((l) => l.city === "Dhaka");
@@ -68,18 +70,18 @@ export default function AllOrdersPage() {
   if (isLoading) return <PageLoader />;
   return (
     <>
-      <DbPageTitle title={"All orders"} />
+      <DbPageTitle title={t("all_orders")} />
       {parcels.length > 0 ? (
         <div className="overflow-x-auto rounded-box border border-base-content/5 bg-white shadow">
           <table className="table">
             <thead className="bg-base-200">
               <tr>
-                <th>Sl No.</th>
-                <th>Sender Info</th>
-                <th>Parcel Info</th>
-                <th>Status</th>
-                <th>Recipient Info</th>
-                <th>Actions</th>
+                <th>{t("table.sl_no")}</th>
+                <th>{t("table.sender_info")}</th>
+                <th>{t("table.parcel_info")}</th>
+                <th>{t("table.status")}</th>
+                <th>{t("table.recipient_info")}</th>
+                <th>{t("table.actions")}</th>
               </tr>
             </thead>
             <tbody>

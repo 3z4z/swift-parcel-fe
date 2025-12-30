@@ -3,8 +3,10 @@ import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import DbPageTitle from "../../components/dashboard/PageTitle";
+import { useTranslation } from "react-i18next";
 
 export default function ManageUsersPage() {
+  const { t } = useTranslation();
   const axios = useAxios();
   const [isUpdating, setIsUpdating] = useState(false);
   const {
@@ -27,17 +29,17 @@ export default function ManageUsersPage() {
   };
   return (
     <>
-      <DbPageTitle title={"Manage all users"} />
+      <DbPageTitle title={t("all_users")} />
       <div className="overflow-x-auto rounded-box border border-base-content/5 bg-white shadow">
         <table className="table">
           <thead className="bg-base-200">
             <tr>
-              <th>Sl No.</th>
-              <th>Name</th>
-              <th>Role</th>
-              <th>Preferred City</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th>{t("table.sl_no")}</th>
+              <th>{t("table.name")}</th>
+              <th>{t("table.role")}</th>
+              <th>{t("table.preferred_city")}</th>
+              <th>{t("table.status")}</th>
+              <th>{t("table.actions")}</th>
             </tr>
           </thead>
           <tbody>

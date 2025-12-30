@@ -1,0 +1,145 @@
+{
+  "title": "Welcome",
+  "slogan": "Send your valuable parcels anywhere easily",
+  "admin": "Admin",
+  "agent": "Agent",
+  "user": "User",
+  "bdt": "BDT",
+  "all_orders": "All Orders",
+  "my_orders": "My Orders",
+  "all_users": "All Users",
+  "assigned_orders": "Assigned Orders to Me",
+  "add_parcel": "Add a new parcel",
+  "table": {
+    "sl_no": "Sl No.",
+    "sender_info": "Sender Info",
+    "recipient_info": "Recipient Info",
+    "pickup_info": "Pickup Info",
+    "name": "Name",
+    "role": "Role",
+    "preferred_city": "Preferred City",
+    "parcel_info": "Parcel Info",
+    "parcel_cost": "Parcel Cost",
+    "pickup_amount": "Pickup Amount",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "status": {
+    "pending": "Pending",
+    "assigned": "Assigned",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "title": " Welcome to"
+  },
+  "nav": {
+    "send_parcel": "Send Parcel",
+    "scan": "Scan"
+  },
+  "form": {
+    "titles": {
+      "create_account": "Create An Account",
+      "old_user": "Already a user?",
+      "login": "Login Now",
+      "new_user": "New Here?",
+      "cost_calculator": "Cost Calculator"
+    },
+    "labels": {
+      "full_name": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "confirm_password": "Confirm Password",
+      "preferred_city": "Preferred City",
+      "role": "Select Role",
+      "parcel_type": "Parcel Type",
+      "delivery_type": "Delivery Type",
+      "delivery_location": "Delivery Location",
+      "payment_type": "Payment Type",
+      "parcel_weight": "Parcel Weight",
+      "product_qts": "Product Quantity",
+      "amount_collect": "Type Amount to Collect",
+      "pickup_division": "Pickup Division",
+      "pickup_district": "Pickup District",
+      "pickup_address": "Pickup Address",
+      "instructions": "Special Instructions",
+      "recipient_name": "Recipient Name",
+      "recipient_contact": "Recipient Contact No",
+      "recipient_division": "Recipient Division",
+      "recipient_district": "Recipient District",
+      "recipient_address": "Recipient Address"
+    },
+    "options": {
+      "select_preferred_city": "Select a preferred city",
+      "select_pickup_division": "Select pickup division",
+      "select_pickup_district": "Select pickup district",
+      "select_recipient_division": "Select recipient division",
+      "select_recipient_district": "Select recipient district"
+    },
+    "actions": {
+      "login_now": "Login Now",
+      "logging_in": "Logging In",
+      "register": "Register",
+      "registering": "Registering",
+      "calculator": "Calculator",
+      "calculate_now": "Calculate Now",
+      "send_now": "Send Now",
+      "sending": "Sending"
+    },
+    "validations": {
+      "name": "Name is required",
+      "email": "Email is required",
+      "password": "Password is required",
+      "password_mismatch": "Password not matched!",
+      "preferred_city": "Preferred city is required",
+      "parcel_weight": "Parcel weight is required",
+      "parcel_weight_int": "Decimal numbers are not allowed",
+      "parcel_weight_min": "Below 1Kg not allowed. Any weight below 1Kg considered 1",
+      "parcel_weight_max": "Weight must not exceed 10Kg",
+      "pickup_amount": "Pickup amount is required",
+      "pickup_division": "Pickup division is required",
+      "pickup_district": "Pickup district is required",
+      "pickup_address": "Full pickup address is required",
+      "recipient_name": "Recipient name is required",
+      "recipient_contact": "Recipient contact number is required",
+      "recipient_division": "Recipient division is required",
+      "recipient_district": "Recipient district is required",
+      "recipient_address": "Full delivery address is required"
+    },
+    "placeholders": {
+      "parcel_weight": "Type parcel weight in Kg",
+      "amount_collect": "Enter amount to collect in BDT",
+      "pickup_address": "Enter complete pickup address",
+      "instructions": "Enter special instructions (optional)",
+      "recipient_name": "Type recipient name",
+      "recipient_contact": "Type recipient contact number",
+      "recipient_address": "Enter complete recipient address"
+    },
+    "toasts": {
+      "success": {
+        "registration": "User Registration Successful!",
+        "login": "Logged in Successfully!"
+      }
+    }
+  },
+  "parcel": {
+    "parcel_info": "Parcel Info",
+    "tracking_id": "Tracking ID",
+    "movement_status": "Movement Status",
+    "product_type": "Product Type",
+    "parcel_weight": "Parcel Weight",
+    "product_qts": "Product Quantity",
+    "delivery_type": "Delivery Type",
+    "pickup_address": "Pickup Address",
+    "pickup_location": "Pickup Location",
+    "instruction": "Special Instructions",
+    "payment_info": "Payment Info",
+    "receiver_info": "Receiver Info",
+    "address": "Address",
+    "location": "Location",
+    "scan": "Scan Parcel QR Code"
+  }
+}

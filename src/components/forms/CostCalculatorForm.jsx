@@ -5,8 +5,10 @@ import {
   EXTRA_WEIGHT_COST,
   PAYMENT_FEES,
 } from "../../utils/costRates";
+import { useTranslation } from "react-i18next";
 
 export default function CostCalculatorForm() {
+  const { t } = useTranslation();
   const [total, setTotal] = useState(0);
   const [qts, setQts] = useState(1);
   const { register, handleSubmit, setValue } = useForm({
@@ -22,29 +24,39 @@ export default function CostCalculatorForm() {
   };
   return (
     <form onSubmit={handleSubmit(calculateCost)} className="fieldset cost-form">
-      <label className="label text-base-300">Parcel Type</label>
+      <label className="label text-base-300">
+        {t("form.labels.parcel_type")}
+      </label>
       <select className="select w-full" {...register("pType")}>
         <option value="parcel">Parcel</option>
         <option value="fragile">Fragile</option>
       </select>
-      <label className="label text-base-300 mt-2">Delivery Type</label>
+      <label className="label text-base-300 mt-2">
+        {t("form.labels.delivery_type")}
+      </label>
       <select className="select w-full" {...register("dType")}>
         <option value="normal">Normal Delivery</option>
         <option value="hub">Hub Delivery</option>
         <option value="urgent">Urgent Delivery</option>
       </select>
-      <label className="label text-base-300 mt-2">Delivery Location</label>
+      <label className="label text-base-300 mt-2">
+        {t("form.labels.delivery_location")}
+      </label>
       <select className="select w-full" {...register("dLocation")}>
         <option value="same">Same City</option>
         <option value="outside">Other City</option>
       </select>
-      <label className="label text-base-300 mt-2">Payment Type</label>
+      <label className="label text-base-300 mt-2">
+        {t("form.labels.payment_type")}
+      </label>
       <select className="select w-full" {...register("payType")}>
         <option value="cod">Cash On Delivery</option>
         <option value="prepaid">Pre-paid</option>
       </select>
 
-      <label className="label text-base-300 mt-2">Parcel Weight</label>
+      <label className="label text-base-300 mt-2">
+        {t("form.labels.parcel_weight")}
+      </label>
       <div className="join w-full">
         <button
           type="button"
@@ -78,9 +90,9 @@ export default function CostCalculatorForm() {
           +
         </button>
       </div>
-      <button className="btn mt-4">Calculate Now</button>
+      <button className="btn mt-4">{t("form.actions.calculate_now")}</button>
       <p className="text-center pt-10 pb-5 text-white text-3xl font-bold">
-        ৳{total} BDT
+        ৳{total} {t("bdt")}
       </p>
     </form>
   );

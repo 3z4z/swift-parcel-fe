@@ -10,9 +10,11 @@ import useLocations from "../../hooks/useLocations";
 import { useEffect } from "react";
 import { useScanStore } from "../../stores/useScanStore";
 import { handleOrderUpdate } from "../../utils/handleOrderUpdate";
+import { useTranslation } from "react-i18next";
 // import { getGeoLocation } from "../../utils/geoLocation";
 
 export default function AssignedOrdersPage() {
+  const { t } = useTranslation();
   const { scannedOrderTId, clearScan } = useScanStore();
   const locations = useLocations();
   const { user } = useAuthStore();
@@ -62,7 +64,7 @@ export default function AssignedOrdersPage() {
   }, [locations, orders, scannedOrderTId, clearScan, axios, refetch]);
   return (
     <>
-      <DbPageTitle title={"Assigned orders to me"} />
+      <DbPageTitle title={t("assigned_orders")} />
       {isLoading ? (
         <PageLoader />
       ) : orders.length > 0 ? (
@@ -70,11 +72,11 @@ export default function AssignedOrdersPage() {
           <table className="table">
             <thead className="bg-base-200">
               <tr>
-                <th>Sl no.</th>
-                <th>Parcel Info</th>
-                <th>Sender Info</th>
-                <th>Pickup Info</th>
-                <th>Actions</th>
+                <th>{t("table.sl_no")}</th>
+                <th>{t("table.parcel_info")}</th>
+                <th>{t("table.sender_info")}</th>
+                <th>{t("table.pickup_info")}</th>
+                <th>{t("table.actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -155,6 +157,28 @@ export default function AssignedOrdersPage() {
                               </button>
                             );
                           case "assigned-to-deliver":
+                            details = `Delivery Agent is now going to the delivery receive point.`;
+                            return (
+                              <button
+                                onClick={() =>
+                                  handleOrderUpdate(
+                                    axios,
+                                    refetch,
+                                    o,
+                                    "going-to-receiver",
+                                    details,
+                                    deliveryLocation(
+                                      o.recipientDistrict,
+                                      locations
+                                    )
+                                  )
+                                }
+                                className="btn btn-sm py-1! px-4! btn-success btn-soft border-success/15"
+                              >
+                                Mark going to receiver
+                              </button>
+                            );
+                          case "going-to-receiver":
                             details = `Parcel has been delivered to the customer successfully.`;
                             return (
                               <button

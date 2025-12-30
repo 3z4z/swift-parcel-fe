@@ -5,8 +5,10 @@ import useAxios from "../../hooks/useAxios";
 import { IoCall } from "react-icons/io5";
 import ParcelTrackingTimeline from "../../components/dashboard/parcelTracking/ParcelTrackingTimeline";
 import ParcelQRCode from "../../components/ParcelQrCode";
+import { useTranslation } from "react-i18next";
 
 export default function ViewOrderPage() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const axios = useAxios();
   const { data: parcel = {}, isLoading } = useQuery({
@@ -25,7 +27,7 @@ export default function ViewOrderPage() {
           <div>
             <div>
               <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary/25 w-max pe-3 mb-4">
-                Parcel Info
+                {t("parcel.parcel_info")}
               </h3>
               <p>
                 Tracking ID:
@@ -34,41 +36,41 @@ export default function ViewOrderPage() {
                 </span>
               </p>
               <p>
-                Movement Status:
+                {t("parcel.movement_status")}:
                 <span className="capitalize text-primary font-semibold ms-1">
                   {parcel.parcelMovementStatus.split("-").join(" ")}
                 </span>
               </p>
               <p>
-                Product Type:
+                {t("parcel.product_type")}:
                 <span className="capitalize text-primary font-semibold ms-1">
                   {parcel.productType}
                 </span>
               </p>
               <p className="mt-6">
-                Parcel Weight:
+                {t("parcel.parcel_weight")}:
                 <span className="capitalize text-primary font-semibold ms-1">
                   {parcel.parcelWeight} Kg
                 </span>
               </p>
               <p>
-                Product Quantity:
+                {t("parcel.parcel_weight")}:
                 <span className="capitalize text-primary font-semibold ms-1">
                   {parcel.productQts} items
                 </span>
               </p>
               <p>
-                Delivery Type:
+                {t("parcel.delivery_type")}:
                 <span className="capitalize text-primary font-semibold ms-1">
                   {parcel.deliveryType.split("-").join(" ")}
                 </span>
               </p>
               <div className="mt-6">
-                Pickup Address: <br />
+                {t("parcel.pickup_address")}: <br />
                 <span className="text-neutral/80">{parcel.pickupAddress}</span>
               </div>
               <div className="mt-6">
-                Pickup Location:
+                {t("parcel.pickup_location")}:
                 <span className="text-neutral/80 ms-1">
                   {parcel.pickupDivision}
                   {" > "}
@@ -77,7 +79,7 @@ export default function ViewOrderPage() {
               </div>
               {parcel.optionalInstructions && (
                 <div className="mt-6">
-                  Special Instructions: <br />
+                  {t("parcel.instruction")}: <br />
                   <span className="text-neutral/80">
                     {parcel.optionalInstructions}
                   </span>
@@ -86,7 +88,7 @@ export default function ViewOrderPage() {
             </div>
             <div className="mt-5">
               <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary/25 w-max pe-3 mb-4">
-                Payment Info
+                {t("parcel.payment_info")}
               </h3>
               <div className="flex items-center gap-2">
                 <p className="font-semibold text-primary">
@@ -116,7 +118,7 @@ export default function ViewOrderPage() {
           <div className="max-md:mt-5">
             <div className="mb-5">
               <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary/25 w-max pe-3 mb-4">
-                Receiver Info
+                {t("parcel.receiver_info")}
               </h3>
               <p className="font-bold text-primary">{parcel.recipientName}</p>
               <p className="text-sm flex items-center gap-1">
@@ -124,13 +126,13 @@ export default function ViewOrderPage() {
                 {parcel.recipientContact}
               </p>
               <p className="mt-6">
-                Address: <br />
+                {t("parcel.address")}: <br />
                 <span className="text-neutral/80">
                   {parcel.recipientAddress}
                 </span>
               </p>
               <p className="mt-6">
-                Location:
+                {t("parcel.location")}:
                 <span className="text-neutral/80 ms-1">
                   {parcel.recipientDistrict}
                   {" > "}
@@ -140,7 +142,7 @@ export default function ViewOrderPage() {
             </div>
             <div className="mt-5">
               <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary/25 w-max pe-3 mb-4">
-                Scan Parcel QR Code
+                {t("parcel.scan")}
               </h3>
               <ParcelQRCode trackingId={parcel?.trackingId} />
             </div>

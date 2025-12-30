@@ -5,8 +5,10 @@ import { useAuthStore } from "../../stores/useAuthStore";
 import toast from "react-hot-toast";
 import AuthTitleComponent from "../../components/auth/AuthTitle";
 import AuthSpinnerLoader from "../../components/loaders/AuthSpinner";
+import { useTranslation } from "react-i18next";
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const { login, isSigningIn } = useAuthStore();
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -24,7 +26,7 @@ export default function LoginPage() {
       toast.error(error);
       return;
     } else {
-      toast.success("Logged in Successfully!");
+      toast.success(t("form.toasts.success.login"));
       user && navigate(state || "/", { replace: true });
     }
     console.log(data);
@@ -32,27 +34,27 @@ export default function LoginPage() {
   return (
     <form className={authFormStyle} onSubmit={handleSubmit(handleLogin)}>
       <AuthTitleComponent
-        title={"Login Now"}
-        subtitle={"New Here?"}
-        link={{ path: "/auth/register", name: "Register" }}
+        title={t("form.titles.login")}
+        subtitle={t("form.titles.new_user")}
+        link={{ path: "/auth/register", name: t("auth.register") }}
       />
-      <label className="label">Email</label>
+      <label className="label">{t("form.labels.email")}</label>
       <input
         type="email"
         className="input w-full"
         placeholder="johndoe@email.com"
         {...register("email", {
-          required: "Email is required",
+          required: t("form.validations.email"),
         })}
       />
       {errors.email && <p className="text-error">{errors.email.message}</p>}
-      <label className="label mt-2">Password</label>
+      <label className="label mt-2">{t("form.labels.password")}</label>
       <input
         type="password"
         className="input w-full"
         placeholder="******"
         {...register("password", {
-          required: "Password is required",
+          required: t("form.validations.password"),
         })}
       />
       {errors.password && (
@@ -60,7 +62,9 @@ export default function LoginPage() {
       )}
       <button disabled={isSigningIn} className="btn btn-primary mt-3">
         {isSigningIn && <AuthSpinnerLoader />}
-        {isSigningIn ? "Logging in" : "Login Now"}
+        {isSigningIn
+          ? t("form.actions.logging_in")
+          : t("form.actions.login_now")}
       </button>
     </form>
   );

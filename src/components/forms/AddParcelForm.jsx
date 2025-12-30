@@ -4,9 +4,11 @@ import { use, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
 import AuthSpinnerLoader from "../loaders/AuthSpinner";
+import { useTranslation } from "react-i18next";
 // import { getGeoLocation } from "../../utils/geoLocation";
 
 export default function AddParcelForm({ getLocations }) {
+  const { t } = useTranslation();
   const locations = use(getLocations);
   const divisions = [...new Set(locations.map((l) => l.region))];
   const { user } = useAuthStore();
@@ -83,14 +85,14 @@ export default function AddParcelForm({ getLocations }) {
     <form onSubmit={handleSubmit(handleAddParcel)} className="fieldset">
       <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
-          <label className="label">Product Type</label>
+          <label className="label">{t("form.labels.parcel_type")}</label>
           <select className="select w-full" {...register("productType")}>
             <option value="parcel">Parcel</option>
             <option value="fragile">Fragile</option>
           </select>
         </div>
         <div className="flex-1">
-          <label className="label">Delivery Type</label>
+          <label className="label">{t("form.labels.delivery_type")}</label>
           <select className="select w-full" {...register("deliveryType")}>
             <option value="normal-delivery">Normal Delivery</option>
             <option value="urgent-delivery">Urgent Delivery (Same Day)</option>
@@ -100,24 +102,24 @@ export default function AddParcelForm({ getLocations }) {
       </div>
       <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
-          <label className="label">Parcel Weight</label>
+          <label className="label">{t("form.labels.parcel_weight")}</label>
           <input
             type="number"
-            placeholder="Type parcel weight in Kg"
+            placeholder={t("form.placeholders.parcel_weight")}
             className="input w-full"
             {...register("parcelWeight", {
               valueAsNumber: true,
-              required: "Parcel weight is required",
+              required: t("form.validations.parcel_weight"),
               validate: (value) =>
-                Number.isInteger(value) || "Fractional not allowed",
+                Number.isInteger(value) ||
+                t("form.validations.parcel_weight_int"),
               min: {
                 value: 1,
-                message:
-                  "Below 1Kg not allowed. Any weight below 1Kg considered 1",
+                message: t("form.validations.parcel_weight_min"),
               },
               max: {
                 value: 10,
-                message: "Weight must not exceed 10Kg",
+                message: t("form.validations.parcel_weight_max"),
               },
             })}
           />
@@ -126,7 +128,7 @@ export default function AddParcelForm({ getLocations }) {
           )}
         </div>
         <div className="flex-1">
-          <label className="label">Product Quantity</label>
+          <label className="label">{t("form.labels.product_qts")}</label>
           <div className="join w-full">
             <button
               disabled={qts <= 1}
@@ -162,24 +164,24 @@ export default function AddParcelForm({ getLocations }) {
       </div>
       <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
-          <label className="label">Payment Type</label>
+          <label className="label">{t("form.labels.payment_type")}</label>
           <select className="select w-full" {...register("paymentType")}>
             <option value="cod">Cash On Delivery</option>
             <option value="prepaid">Pre-paid</option>
           </select>
         </div>
         <div className="flex-1">
-          <label className="label">Type Amount to collect</label>
+          <label className="label">{t("form.labels.amount_collect")}</label>
           <input
             disabled={watchPaymentType === "prepaid"}
             type="number"
             className="input w-full disabled:bg-base-100"
-            placeholder="Enter amount to collect"
+            placeholder={t("form.placeholders.amount_collect")}
             {...register("pickupAmount", {
               valueAsNumber: true,
               required:
                 watchPaymentType === "cod"
-                  ? "Pickup amount is required"
+                  ? t("form.validations.pickup_amount")
                   : false,
             })}
           />
@@ -190,14 +192,14 @@ export default function AddParcelForm({ getLocations }) {
       </div>
       <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
-          <label className="label">Pickup Division</label>
+          <label className="label">{t("form.labels.pickup_division")}</label>
           <select
             className="select w-full"
             {...register("pickupDivision", {
-              required: "Pickup division is required",
+              required: t("form.validations.pickup_division"),
             })}
           >
-            <option value="">Select pickup division</option>
+            <option value="">{t("form.options.select_pickup_division")}</option>
             {divisions.map((d, i) => (
               <option key={i} value={d}>
                 {d}
@@ -209,14 +211,14 @@ export default function AddParcelForm({ getLocations }) {
           )}
         </div>
         <div className="flex-1">
-          <label className="label">Pickup District</label>
+          <label className="label">{t("form.labels.pickup_district")}</label>
           <select
             className="select w-full"
             {...register("pickupDistrict", {
-              required: "Pickup district is required",
+              required: t("form.validations.pickup_district"),
             })}
           >
-            <option value="">Select pickup district</option>
+            <option value="">{t("form.options.select_pickup_district")}</option>
             {getDistrictsByDivision(watchPickupDivision).map((d, i) => (
               <option key={i} value={d}>
                 {d}
@@ -228,32 +230,32 @@ export default function AddParcelForm({ getLocations }) {
           )}
         </div>
       </div>
-      <label className="label">Pickup Address</label>
+      <label className="label">{t("form.labels.pickup_address")}</label>
       <textarea
         className="textarea w-full"
-        placeholder="Enter your full pickup address"
+        placeholder={t("form.placeholders.pickup_address")}
         {...register("pickupAddress", {
-          required: "Full pickup address is required",
+          required: t("form.validations.pickup_address"),
         })}
       ></textarea>
       {errors.pickupAddress && (
         <p className="text-error">{errors.pickupAddress.message}</p>
       )}
-      <label className="label mt-2">Special Instructions</label>
+      <label className="label mt-2">{t("form.labels.instructions")}</label>
       <textarea
         className="textarea w-full"
-        placeholder="Enter special instructions (optional)"
+        placeholder={t("form.placeholders.instructions")}
         {...register("optionalInstructions")}
       ></textarea>
       <div className="flex max-sm:flex-col mt-4 mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
-          <label className="label">Recipient Name</label>
+          <label className="label">{t("form.labels.recipient_name")}</label>
           <input
             type="text"
-            placeholder="Type Recipient Name"
+            placeholder={t("form.placeholders.recipient_name")}
             className="input w-full"
             {...register("recipientName", {
-              required: "Recipient name is required",
+              required: t("form.validations.recipient_name"),
             })}
           />
           {errors.recipientName && (
@@ -261,13 +263,13 @@ export default function AddParcelForm({ getLocations }) {
           )}
         </div>
         <div className="flex-1">
-          <label className="label">Recipient Contact No</label>
+          <label className="label">{t("form.labels.recipient_contact")}</label>
           <input
             type="text"
-            placeholder="Type Recipient Contact Number"
+            placeholder={t("form.placeholders.recipient_contact")}
             className="input w-full"
             {...register("recipientContact", {
-              required: "Recipient contact number is required",
+              required: t("form.validations.recipient_contact"),
             })}
           />
           {errors.recipientContact && (
@@ -278,14 +280,16 @@ export default function AddParcelForm({ getLocations }) {
 
       <div className="flex max-sm:flex-col mb-2 max-sm:gap-3 gap-8">
         <div className="flex-1">
-          <label className="label">Recipient Division</label>
+          <label className="label">{t("form.labels.recipient_division")}</label>
           <select
             className="select w-full"
             {...register("recipientDivision", {
-              required: "Delivery division is required",
+              required: t("form.validations.recipient_division"),
             })}
           >
-            <option value="">Select recipient division</option>
+            <option value="">
+              {t("form.options.select_recipient_division")}
+            </option>
             {divisions.map((d, i) => (
               <option key={i} value={d}>
                 {d}
@@ -297,14 +301,16 @@ export default function AddParcelForm({ getLocations }) {
           )}
         </div>
         <div className="flex-1">
-          <label className="label">Recipient District</label>
+          <label className="label">{t("form.labels.recipient_district")}</label>
           <select
             className="select w-full"
             {...register("recipientDistrict", {
-              required: "Delivery district is required",
+              required: t("form.validations.recipient_district"),
             })}
           >
-            <option value="">Select recipient district</option>
+            <option value="">
+              {t("form.options.select_recipient_district")}
+            </option>
             {getDistrictsByDivision(watchRecipientDivision).map((d, i) => (
               <option key={i} value={d}>
                 {d}
@@ -316,12 +322,12 @@ export default function AddParcelForm({ getLocations }) {
           )}
         </div>
       </div>
-      <label className="label">Recipient Address</label>
+      <label className="label">{t("form.labels.recipient_address")}</label>
       <textarea
         className="textarea w-full"
-        placeholder="Enter recipient address"
+        placeholder={t("form.placeholders.recipient_address")}
         {...register("recipientAddress", {
-          required: "Full delivery address is required",
+          required: t("form.validations.recipient_address"),
         })}
       ></textarea>
       {errors.recipientAddress && (
@@ -329,7 +335,7 @@ export default function AddParcelForm({ getLocations }) {
       )}
       <button disabled={isLoading} className="btn btn-primary w-max px-10 mt-2">
         {isLoading && <AuthSpinnerLoader />}
-        {isLoading ? "Sending" : "Send Now"}
+        {isLoading ? t("form.actions.sending") : t("form.actions.send_now")}
       </button>
     </form>
   );

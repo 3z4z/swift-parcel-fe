@@ -6,14 +6,18 @@ import { router } from "./routes/Routes";
 import AppInit from "./AppInit";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "./i18n";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <AppInit />
-      <Toaster />
+      <LanguageProvider>
+        <RouterProvider router={router} />
+        <AppInit />
+        <Toaster />
+      </LanguageProvider>
     </QueryClientProvider>
   </StrictMode>
 );

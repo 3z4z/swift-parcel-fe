@@ -4,14 +4,16 @@ import AddParcelForm from "../../components/forms/AddParcelForm";
 import CostCalculatorForm from "../../components/forms/CostCalculatorForm";
 import PageLoader from "../../components/loaders/PageLoader/PageLoader";
 import { IoMdClose } from "react-icons/io";
+import { useTranslation } from "react-i18next";
 
 const getLocations = fetch("/data/locations.json").then((res) => res.json());
 
 export default function AddParcelPage() {
+  const { t } = useTranslation();
   return (
     <>
       <div className="flex justify-between">
-        <DbPageTitle title={"Add a parcel"} />
+        <DbPageTitle title={t("add_parcel")} />
         <div className="drawer drawer-end lg:hidden w-max">
           <input id="calc-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content">
@@ -20,7 +22,7 @@ export default function AddParcelPage() {
               htmlFor="calc-drawer"
               className="drawer-button btn btn-primary rounded-full"
             >
-              Calculator
+              {t("form.actions.calculator")}
             </label>
           </div>
           <div className="drawer-side">
@@ -39,7 +41,7 @@ export default function AddParcelPage() {
               </label>
               <div className="bg-primary rounded-2xl p-6 h-max">
                 <div className="text-center text-xl text-white mb-5 mt-3 font-medium">
-                  Cost Calculator
+                  {t("form.titles.cost_calculator")}
                 </div>
                 <CostCalculatorForm />
               </div>
@@ -56,7 +58,7 @@ export default function AddParcelPage() {
           </div>
           <div className="max-lg:hidden bg-primary rounded-2xl p-6 h-max">
             <div className="text-center text-xl text-white mb-5 mt-3 font-medium">
-              Cost Calculator
+              {t("form.titles.cost_calculator")}
             </div>
             <CostCalculatorForm />
           </div>
