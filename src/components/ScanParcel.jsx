@@ -2,8 +2,10 @@ import { useRef } from "react";
 import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 import { useScanStore } from "../stores/useScanStore";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { setScannedOrderTId, scannedOrderTId } = useScanStore();
   const videoRef = useRef();
@@ -56,11 +58,11 @@ export const ScanParcelComponent = ({ scanParcelModalRef, onScan }) => {
           <span>{scannedOrderTId}</span>
         </p>
         <div className="modal-action">
-          <button className="btn btn-primary" onClick={handleClose}>
-            Close
+          <button className="btn btn-primary btn-outline" onClick={handleClose}>
+            {t("modal.actions.close")}
           </button>
-          <button className="btn btn-secondary" onClick={startScanner}>
-            Start Scan
+          <button className="btn btn-primary" onClick={startScanner}>
+            {t("modal.actions.start_scan")}
           </button>
         </div>
       </div>

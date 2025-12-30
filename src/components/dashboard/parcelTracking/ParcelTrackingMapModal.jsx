@@ -9,6 +9,7 @@ import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import { useTranslation } from "react-i18next";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -18,6 +19,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 export default function ParcelTrackingMapModal({ logs, mapModalRef }) {
+  const { t } = useTranslation();
   const locations = logs?.map((l) => ({
     coords: [l?.location?.lat, l?.location?.lng],
     details: l?.details,
@@ -87,7 +89,7 @@ export default function ParcelTrackingMapModal({ logs, mapModalRef }) {
             className="btn btn-primary btn-soft border-primary/25"
             onClick={() => mapModalRef.current.close()}
           >
-            Close
+            {t("modal.actions.close")}
           </button>
         </div>
       </div>

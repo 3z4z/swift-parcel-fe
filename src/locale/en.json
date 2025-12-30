@@ -129,6 +129,16 @@
       }
     }
   },
+  "modal": {
+    "titles": {
+      "agents_available": "Agents available"
+    },
+    "actions": {
+      "close": "Close",
+      "start_scan": "Start Scan",
+      "confirm_assignment": "Confirm Assignment"
+    }
+  },
   "parcel": {
     "parcel_info": "Parcel Info",
     "tracking_id": "Tracking ID",
@@ -144,6 +154,9 @@
     "receiver_info": "Receiver Info",
     "address": "Address",
     "location": "Location",
-    "scan": "Scan Parcel QR Code"
+    "scan": "Scan Parcel QR Code",
+    "pay_now": "Pay Now",
+    "timeline_view": "Timeline View",
+    "view_on_map": "View on Map"
   }
 }

@@ -7,8 +7,10 @@ import { LuMapPin } from "react-icons/lu";
 import { useRef } from "react";
 import ParcelTrackingMapModal from "./ParcelTrackingMapModal";
 import { timeLines } from "../../../utils/timelines";
+import { useTranslation } from "react-i18next";
 
 export default function ParcelTrackingTimeline({ parcel }) {
+  const { t } = useTranslation();
   const { checkStatus } = useParcelProgress(parcel?.parcelMovementStatus);
 
   const axios = useAxios();
@@ -79,10 +81,10 @@ export default function ParcelTrackingTimeline({ parcel }) {
         })}
       </ul>
       <div className="flex mt-8 mb-3 items-center justify-between">
-        <h3 className="text-xl font-bold">Timeline view</h3>
+        <h3 className="text-xl font-bold">{t("parcel.timeline_view")}</h3>
         <button className="btn btn-primary" onClick={showMapModal}>
           <LuMapPin className="size-4" />
-          View on Map
+          {t("parcel.view_on_map")}
         </button>
       </div>
       <div>

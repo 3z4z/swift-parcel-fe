@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../hooks/useAxios";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 export default function AssignRiderModal({
   locations,
@@ -9,6 +10,7 @@ export default function AssignRiderModal({
   selectedParcel,
   refetch,
 }) {
+  const { t } = useTranslation();
   const axios = useAxios();
   const [selectedAgent, setSelectedAgent] = useState(null);
 
@@ -91,7 +93,9 @@ export default function AssignRiderModal({
   return (
     <dialog ref={assignRiderModalRef} className="modal">
       <div className="modal-box max-w-2xl">
-        <h3 className="text-2xl font-bold mb-5">Agents available</h3>
+        <h3 className="text-2xl font-bold mb-5">
+          {t("modal.titles.agents_available")}
+        </h3>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
@@ -137,6 +141,12 @@ export default function AssignRiderModal({
           </div>
         )}
         <div className="modal-action">
+          <button
+            className="btn btn-primary btn-outline"
+            onClick={() => assignRiderModalRef.current.close()}
+          >
+            {t("modal.actions.close")}
+          </button>
           {(() => {
             switch (selectedParcel?.parcelMovementStatus) {
               case "accepted":
@@ -148,7 +158,7 @@ export default function AssignRiderModal({
                     }
                     disabled={!selectedAgent}
                   >
-                    Confirm Assignment
+                    {t("modal.actions.confirm_assignment")}
                   </button>
                 );
               case "at-delivery-hub":
@@ -164,7 +174,7 @@ export default function AssignRiderModal({
                     }
                     disabled={!selectedAgent}
                   >
-                    Confirm Assignment
+                    {t("modal.actions.confirm_assignment")}
                   </button>
                 );
             }
@@ -172,7 +182,9 @@ export default function AssignRiderModal({
         </div>
       </div>
       <form method="dialog" className="modal-backdrop">
-        <button onClick={() => setSelectedAgent(null)}>close</button>
+        <button onClick={() => setSelectedAgent(null)}>
+          {t("modal.actions.close")}
+        </button>
       </form>
     </dialog>
   );

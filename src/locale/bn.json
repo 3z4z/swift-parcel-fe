@@ -129,6 +129,16 @@
       }
     }
   },
+  "modal": {
+    "titles": {
+      "agents_available": "প্রতিনিধি এভেইলেবল রয়েছেন"
+    },
+    "actions": {
+      "close": "বন্ধ",
+      "start_scan": "স্ক্যান শুরু করুন",
+      "confirm_assignment": "নিয়োগ নিশ্চিত করুন"
+    }
+  },
   "parcel": {
     "parcel_info": "পার্সেলের তথ্য",
     "tracking_id": "ট্র্যাকিং আইডি",
@@ -144,6 +154,9 @@
     "receiver_info": "প্রাপকের তথ্য",
     "address": "ঠিকানা ",
     "location": "স্থান",
-    "scan": "পার্সেল QR কোড স্ক্যান করুন"
+    "scan": "পার্সেল QR কোড স্ক্যান করুন",
+    "pay_now": "এখনই পেমেন্ট করুন",
+    "timeline_view": "টাইমলাইন দেখুন",
+    "view_on_map": "মানচিত্রে দেখুন"
   }
 }

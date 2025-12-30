@@ -105,7 +105,9 @@ export default function ViewOrderPage() {
                     <p className="badge badge-warning badge-soft">
                       {parcel.paymentStatus}
                     </p>
-                    <button className="btn btn-primary btn-sm">Pay Now</button>
+                    <button className="btn btn-primary btn-sm">
+                      {t("parcel.pay_now")}
+                    </button>
                   </>
                 ) : (
                   <p className="badge badge-success badge-soft">
