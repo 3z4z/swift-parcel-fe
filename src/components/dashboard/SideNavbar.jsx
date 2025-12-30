@@ -1,8 +1,10 @@
 import { LuClipboardList, LuLayoutGrid, LuUsers } from "react-icons/lu";
 import { Link } from "react-router";
 import useRole from "../../hooks/useRole";
+import { useTranslation } from "react-i18next";
 
 export default function DbSideNavbarComponent() {
+  const { t } = useTranslation();
   const { role } = useRole();
   return (
     <>
@@ -17,10 +19,12 @@ export default function DbSideNavbarComponent() {
             <Link
               to={"/"}
               className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-              data-tip="Homepage"
+              data-tip={t("nav.homepage")}
             >
               <LuLayoutGrid className="size-4 my-1.5" />
-              <span className="is-drawer-close:hidden">Homepage</span>
+              <span className="is-drawer-close:hidden">
+                {t("nav.homepage")}
+              </span>
             </Link>
           </li>
           <li>
@@ -33,11 +37,11 @@ export default function DbSideNavbarComponent() {
                   : "/my-orders"
               }
               className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-              data-tip="Orders List"
+              data-tip={t("nav.orders_list")}
             >
               <LuClipboardList className="size-4 my-1.5" />
               <span className="is-drawer-close:hidden whitespace-nowrap">
-                Orders List
+                {t("nav.orders_list")}
               </span>
             </Link>
           </li>
@@ -46,11 +50,11 @@ export default function DbSideNavbarComponent() {
               <Link
                 to={"/manage-users"}
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Manage Users"
+                data-tip={t("nav.manage_users")}
               >
                 <LuUsers className="size-4 my-1.5" />
                 <span className="is-drawer-close:hidden whitespace-nowrap">
-                  Manage Users
+                  {t("nav.manage_users")}
                 </span>
               </Link>
             </li>

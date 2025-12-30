@@ -39,7 +39,10 @@
   },
   "nav": {
     "send_parcel": "Send Parcel",
-    "scan": "Scan"
+    "scan": "Scan",
+    "homepage": "Homepage",
+    "orders_list": "Orders List",
+    "manage_users": "Manage Users"
   },
   "form": {
     "titles": {

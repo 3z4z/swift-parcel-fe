@@ -12,6 +12,7 @@ import { deliveryLocation } from "../../utils/getDeliveryLocation";
 import useLocations from "../../hooks/useLocations";
 import { handleOrderUpdate } from "../../utils/handleOrderUpdate";
 import { useTranslation } from "react-i18next";
+import { FaFileCsv, FaRegFilePdf } from "react-icons/fa";
 
 export default function AllOrdersPage() {
   const { t } = useTranslation();
@@ -68,9 +69,72 @@ export default function AllOrdersPage() {
     console.log(parcel);
   };
   if (isLoading) return <PageLoader />;
+  const filters = [
+    { key: "today", title: "Today" },
+    { key: "lastWeek", title: "Last Week" },
+    { key: "lastMonth", title: "Last Month" },
+  ];
   return (
     <>
-      <DbPageTitle title={t("all_orders")} />
+      <div className="flex justify-between mb-4 flex-wrap">
+        <DbPageTitle title={t("all_orders")} />
+        <div className="flex">
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn m-1 btn-primary btn-outline rounded-full"
+            >
+              <FaFileCsv />
+              Export CSV
+            </div>
+            <ul
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              {filters.map((f) => (
+                <li key={f.key}>
+                  <a
+                    key={`csv-${f.key}`}
+                    href={`${
+                      import.meta.env.VITE_API_BASE_URL
+                    }/export/csv?filter=${f.key}`}
+                  >
+                    {f.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn m-1 btn-primary rounded-full"
+            >
+              <FaRegFilePdf />
+              Export PDF
+            </div>
+            <ul
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              {filters.map((f) => (
+                <li key={f.key}>
+                  <a
+                    key={`pdf-${f.key}`}
+                    href={`${
+                      import.meta.env.VITE_API_BASE_URL
+                    }/export/pdf?filter=${f.key}`}
+                  >
+                    {f.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
       {parcels.length > 0 ? (
         <div className="overflow-x-auto rounded-box border border-base-content/5 bg-white shadow">
           <table className="table">
