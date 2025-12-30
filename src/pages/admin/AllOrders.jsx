@@ -182,7 +182,7 @@ export default function AllOrdersPage() {
                     <td>
                       <div className="flex gap-1 items-center capitalize">
                         <span
-                          className={`badge badge-sm badge-soft font-medium h-auto py-px ${
+                          className={`badge badge-sm badge-soft font-medium h-auto py-px text-nowrap ${
                             p.parcelMovementStatus === "delivered"
                               ? "badge-success border-success/15"
                               : p.parcelMovementStatus === "cancelled" ||
