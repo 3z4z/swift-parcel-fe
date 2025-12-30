@@ -43,8 +43,8 @@ See live preview at here: [SwiftParcel](https://www.swift-prcl.netlify.app)
 - **Clone the repository**
 
 ```
-git clone https://github.com/your-username/swiftparcel-frontend.git
-cd swiftparcel-frontend
+git clone https://github.com/3z4z/swift-parcel-fe.git
+cd swift-parcel-fe
 ```
 
 - **Install dependencies**
