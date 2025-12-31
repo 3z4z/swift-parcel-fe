@@ -8,7 +8,6 @@ import { useAuthStore } from "../../stores/useAuthStore";
 export default function DashboardHomePage() {
   const { isCookieReady } = useAuthStore();
   const { role, isRoleLoading } = useRole();
-  console.log("role", role);
   if (isRoleLoading || !isCookieReady) {
     return <PageLoader />;
   }

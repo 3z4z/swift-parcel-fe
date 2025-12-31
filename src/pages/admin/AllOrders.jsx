@@ -66,7 +66,6 @@ export default function AllOrdersPage() {
         refetch();
       }
     });
-    console.log(parcel);
   };
   if (isLoading) return <PageLoader />;
   const filters = [

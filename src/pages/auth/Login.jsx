@@ -29,7 +29,6 @@ export default function LoginPage() {
       toast.success(t("form.toasts.success.login"));
       user && navigate(state || "/", { replace: true });
     }
-    console.log(data);
   };
   return (
     <form className={authFormStyle} onSubmit={handleSubmit(handleLogin)}>

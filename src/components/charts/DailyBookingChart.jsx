@@ -21,7 +21,6 @@ export default function DailyBookingChart() {
     },
   });
   if (isLoading) return <PageLoader />;
-  console.log("analytics", analytics);
   return (
     <LineChart
       style={{

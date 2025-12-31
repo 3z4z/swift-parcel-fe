@@ -72,8 +72,6 @@ export default function AssignRiderModal({
         };
       }
 
-      console.log("updateData", updateData);
-
       const res = await axios.patch(
         `/parcels/${selectedParcel._id}`,
         updateData

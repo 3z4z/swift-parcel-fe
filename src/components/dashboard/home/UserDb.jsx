@@ -25,9 +25,8 @@ export default function UserDbHome() {
     },
   });
   if (isLoading) return <PageLoader />;
-  console.log(analytics);
+
   const handleFindParcel = async (data) => {
-    console.log(data);
     const result = await axios.get(
       `/trackings/last-location?trackingId=${data.trackingId}`
     );

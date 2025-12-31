@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 export default function AuthLayout() {
   const { language } = i18n;
   const { t } = useTranslation();
-  console.log("language", language);
   return (
     <div className="lg:grid flex max-lg:flex-col lg:grid-cols-2 w-full items-center bg-white">
       <header className="text-center py-8">

@@ -14,12 +14,10 @@ export default function HeaderComponent() {
     if (user?.email) {
       socket.emit("join-room", user?.email);
       const handleParcelUpdate = (data) => {
-        console.log("Parcel Update:", data);
         toast.success(`${data?.trackingId} ${data?.details}`);
         queryClient.invalidateQueries(["parcels", "assigned-orders", "parcel"]);
       };
       const handleOrderCancel = (data) => {
-        console.log("Parcel Update:", data);
         toast.error(`${data?.trackingId} ${data?.details}`);
         queryClient.invalidateQueries(["parcels", "assigned-orders", "parcel"]);
       };

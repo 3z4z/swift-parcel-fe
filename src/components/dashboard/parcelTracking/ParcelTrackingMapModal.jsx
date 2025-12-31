@@ -43,7 +43,6 @@ export default function ParcelTrackingMapModal({ logs, mapModalRef }) {
 
     return acc;
   }, {});
-  console.log("grouped", grouped);
 
   return (
     <dialog ref={mapModalRef} className="modal">
