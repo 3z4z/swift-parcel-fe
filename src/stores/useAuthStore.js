@@ -23,7 +23,7 @@ export const useAuthStore = create((set, get) => ({
     await axiosInstance.post(
       "/users/login",
       { idToken },
-      { withCredentials: true }
+      { withCredentials: true },
     );
     set({ isCookieReady: true });
   },
@@ -34,7 +34,7 @@ export const useAuthStore = create((set, get) => ({
       const result = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       const user = result.user;
       await updateProfile(user, {
@@ -91,8 +91,9 @@ export const useAuthStore = create((set, get) => ({
         user: currentUser,
         isAuthLoading: false,
         isUserReady: true,
-        isCookieReady: true,
+        isCookieReady: false,
       });
+      await get().sendTokenToBackend(currentUser);
     });
     return unsubscribe;
   },
