@@ -1,22 +1,35 @@
-import { createContext, useContext } from "react";
+/* eslint-disable react-hooks/set-state-in-effect */
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useEffect, useState } from "react";
 import i18n from "../i18n";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
-    localStorage.setItem("lang", lang);
+  const [lang, setLang] = useState("en"); // default
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("lang");
+    if (storedLang) {
+      setLang(storedLang);
+      i18n.changeLanguage(storedLang);
+    }
+  }, []);
+
+  // 👉 function to change language everywhere
+  const changeLanguage = (newLang) => {
+    setLang(newLang);
+    i18n.changeLanguage(newLang);
+    localStorage.setItem("lang", newLang);
   };
 
   return (
-    <LanguageContext.Provider value={{ changeLanguage }}>
+    <LanguageContext.Provider value={{ lang, changeLanguage }}>
       {children}
     </LanguageContext.Provider>
   );
 }
-// eslint-disable-next-line react-refresh/only-export-components
+
 export function useLanguage() {
   return useContext(LanguageContext);
 }
