@@ -2,7 +2,7 @@
 
 ---
 
-**SwiftParcel** is a modern parcel tracking and delivery management frontend application built with React. It allows users, delivery agents, and admins to manage parcels efficiently, track delivery status in real-time, and generate reports.
+**SwiftParcel** is a modern parcel tracking and delivery management application built with React. It allows users, delivery agents, and admins to manage parcels efficiently, track delivery status in real-time, and generate reports.
 
 ---
 

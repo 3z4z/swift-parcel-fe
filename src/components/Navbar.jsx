@@ -12,7 +12,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useTranslation } from "react-i18next";
 
 export default function NavbarComponent() {
-  const { changeLanguage } = useLanguage();
+  const { lang, changeLanguage } = useLanguage();
   const { t } = useTranslation();
   const { user, isAuthLoading, logout } = useAuthStore();
   const { role } = useRole();
@@ -138,6 +138,7 @@ export default function NavbarComponent() {
         />
       </nav>
       <select
+        defaultValue={lang}
         onChange={(e) => changeLanguage(e.target.value)}
         className="select w-20 bg-base-300 border-none"
       >
